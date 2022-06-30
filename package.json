@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "<=16.10.0"
+    "node": "<=17.0.0"
   },
   "dependencies": {
     "@apollo/client": "^3.5.9",
