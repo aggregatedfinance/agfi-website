@@ -69,7 +69,7 @@ function FeaturesTable() {
             { name: 'Automatically Deflationary', v1Ticked: false, v2Ticked: true },
             { name: 'Tax Free Compounding Rewards', v1Ticked: false, v2Ticked: true },
             { name: 'Alpha Association', v1Ticked: false, v2Ticked: true }
-          ].map((row, index) => (
+          ].map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row" align="right">
                 <Typography variant="h6">{row.name}</Typography>
@@ -140,7 +140,7 @@ function Home() {
           <ButtonGroup sx={{ my: 2 }} orientation={isMd ? 'vertical' : 'horizontal'} size="large" fullWidth={isMd}>
             <Button
               variant="contained"
-              href="/dashboard"
+              href="/#/dashboard"
               startIcon={<DashboardIcon />}
               sx={{
                 background: 'linear-gradient(45deg, #CE800D 30%, #f7e51a 90%)',
@@ -271,12 +271,7 @@ function Home() {
                     verticalAlign: 'middle'
                   }}
                 >
-                  <Typography
-                    variant="h5"
-                    color="black"
-                    verticalAlign="center"
-                    sx={{ py: 3, height: 220, fontFamily: 'Montserrat' }}
-                  >
+                  <Typography variant="h5" color="black" sx={{ py: 3, height: 220, fontFamily: 'Montserrat' }}>
                     <b>{item.body}</b>
                   </Typography>
                   {item.icon}

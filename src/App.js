@@ -15,7 +15,7 @@ function Router() {
       element: <Home />
     },
     {
-      path: '/dashboard',
+      path: 'dashboard',
       element: <Dashboard />
     }
   ]);
