@@ -20,7 +20,7 @@ import {
   TWITTER_URL,
   UNISWAP_URL,
   TG_URL
-} from '../config';
+} from '../../config';
 
 export default function Links() {
   return (

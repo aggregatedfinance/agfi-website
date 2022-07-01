@@ -11,8 +11,8 @@ import {
   Card
 } from '@mui/material';
 import { formatUnits } from '@ethersproject/units';
-import { fNumber, fCurrency } from '../formatNumber';
-import { useGetSingleValue } from '../hooks';
+import { fNumber, fCurrency } from '../../formatNumber';
+import { useGetSingleValue } from '../../hooks';
 
 export default function ContractData({ priceData, ethPrice }) {
   const c1Balance = useGetSingleValue('tokensForC1');

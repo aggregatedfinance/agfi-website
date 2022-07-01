@@ -21,9 +21,9 @@ import { formatUnits, parseUnits } from '@ethersproject/units';
 import { useCoingeckoPrice } from '@usedapp/coingecko';
 import { useEthers, useTokenBalance, useTokenAllowance } from '@usedapp/core';
 
-import TransactionStatus from './TransactionStatus';
-import ContractData from './ContractData';
-import Links from './Links';
+import TransactionStatus from './dashboard/TransactionStatus';
+import ContractData from './dashboard/ContractData';
+import Links from './dashboard/Links';
 import { fNumber, fCurrency, fNumberWithDecimals, fPercent } from '../formatNumber';
 import { useUniswapPriceData } from '../uniswap';
 import { getTokenSupply } from '../etherscan';
@@ -291,6 +291,14 @@ function Dashboard() {
                   </Typography>
                 </Box>
               </Card>
+            </Grid>
+          )}
+          {account && !ethPrice && !priceData && (
+            <Grid item xs={12}>
+              <Alert severity="warning">
+                Adblockers can stop this page from loading price data. Disable your adblocker to see market cap and
+                prices.
+              </Alert>
             </Grid>
           )}
           {account && (
