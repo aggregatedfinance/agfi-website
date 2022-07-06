@@ -107,256 +107,268 @@ function Home() {
   }, []);
 
   return (
-    <Container maxWidth="lg">
-      <Grid container spacing={2} alignItems="center" sx={{ marginBottom: 5, marginTop: 15 }}>
-        {isMd && (
-          <Grid item xs={12} textAlign="center">
-            <img src="agfiv2.png" alt="Aggregated Finance" width={256} height={256} />
+    <div>
+      {/* <Container> */}
+      <div
+        style={{
+          background: 'url(BG2.jpg)',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          height: '100vh'
+        }}
+      >
+        <Container maxWidth="xl" sx={{ position: 'absolute', top: '50%', margin: 0, transform: 'translateY(-50%)' }}>
+          <Grid container justifyContent="center" direction={isMd ? 'column-reverse' : 'reverse'}>
+            <Grid item xs={12} md={4} textAlign={isMd ? 'center' : 'left'}>
+              <Typography
+                variant="h4"
+                gutterBottom
+                sx={{ lineHeight: 0, letterSpacing: '0.2rem', fontFamily: 'Montserrat' }}
+              >
+                JOIN THE FUTURE OF
+                <Typography
+                  component="span"
+                  variant="h2"
+                  gutterBottom
+                  sx={{
+                    letterSpacing: '0.4rem',
+                    color: theme.palette.primary.main,
+                    fontFamily: 'Montserrat'
+                  }}
+                >
+                  {' '}
+                  COMMUNITY POWERED INVESTING
+                </Typography>
+              </Typography>
+              <Typography variant="body1" sx={{ paddingBottom: 3, fontFamily: 'Montserrat' }} gutterBottom>
+                AGFI leads the world of <u>truly</u> decentralized investing by leveraging the power of
+                Farming-as-a-Service. Hold to grow your portfolio. Vote to control the treasury. The future rests with{' '}
+                <u>you</u>.
+              </Typography>
+              <ButtonGroup sx={{ my: 2 }} orientation={isMd ? 'vertical' : 'horizontal'} size="large" fullWidth={isMd}>
+                <Button
+                  variant="contained"
+                  href="/#/dashboard"
+                  startIcon={<DashboardIcon />}
+                  sx={{
+                    background: 'linear-gradient(45deg, #CE800D 30%, #f7e51a 90%)',
+                    color: '#000',
+                    fontFamily: 'Montserrat'
+                  }}
+                >
+                  DASHBOARD
+                </Button>
+                <Button variant="outlined" href={DOCS_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
+                  LEARN
+                </Button>
+                <Button variant="outlined" href={TG_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
+                  TELEGRAM
+                </Button>
+                <Button target="_blank" variant="outlined" href={TWITTER_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  TWITTER
+                </Button>
+                <Button target="_blank" variant="outlined" href={ETHERSCAN_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  ETHERSCAN
+                </Button>
+                <Button variant="outlined" target="_blank" href={DEXT_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  CHART
+                </Button>
+                <Button variant="outlined" target="_blank" href={UNISWAP_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  UNISWAP
+                </Button>
+              </ButtonGroup>
+            </Grid>
+            <Grid item xs={12} md={8} textAlign={isMd ? 'center' : 'right'}>
+              <img src="agfiv2.png" alt="Aggregated Finance" width={isMd ? 256 : 512} height={isMd ? 256 : 512} />
+            </Grid>
           </Grid>
-        )}
-        <Grid item xs={12} md={4}>
-          {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
-          <Typography
-            variant="h4"
-            gutterBottom
-            sx={{ lineHeight: 0, letterSpacing: '0.2rem', fontFamily: 'Montserrat' }}
-          >
-            JOIN THE FUTURE OF
-            <Typography
-              component="span"
-              variant="h2"
-              gutterBottom
-              sx={{ letterSpacing: '0.4rem', color: theme.palette.primary.main, fontFamily: 'Montserrat' }}
-            >
-              {' '}
-              COMMUNITY POWERED INVESTING
+        </Container>
+      </div>
+      <Container maxWidth="lg">
+        <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
+          <Grid item xs={12} md={8}>
+            {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
+            <Typography variant="h2" sx={{ fontFamily: 'Montserrat' }}>
+              FINANCE, AGGREGATED.
             </Typography>
-          </Typography>
-          <Typography variant="body1" sx={{ paddingBottom: 3, fontFamily: 'Montserrat' }} gutterBottom>
-            AGFI leads the world of <u>truly</u> decentralized investing by leveraging the power of
-            Farming-as-a-Service. Hold to grow your portfolio. Vote to control the treasury. The future rests with{' '}
-            <u>you</u>.
-          </Typography>
-          <ButtonGroup sx={{ my: 2 }} orientation={isMd ? 'vertical' : 'horizontal'} size="large" fullWidth={isMd}>
-            <Button
-              variant="contained"
-              href="/#/dashboard"
-              startIcon={<DashboardIcon />}
+            <Typography variant="body1" sx={{ fontFamily: 'Montserrat' }} gutterBottom>
+              Farming-as-a-Service (FaaS) has ushered in a new era of DeFi. AGFI is setting ths standard for
+              decentralized FaaS, ensuring this emerging segment can maintain the <i>Decentralized</i> in{' '}
+              <i>Decentralized Finance</i>.
+            </Typography>
+            <Button variant="outlined" href={DOCS_URL} target="_blank" color="secondary" startIcon={<SchoolIcon />}>
+              Learn More
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            {/* img max width */}
+            <img src="overview2.png" alt="Aggregated Finance" width="100%" />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2} justifyContent="center" textAlign="center" sx={{ my: 15 }}>
+          <Grid item xs={12}>
+            <Typography
+              variant="h2"
               sx={{
-                background: 'linear-gradient(45deg, #CE800D 30%, #f7e51a 90%)',
-                color: '#000',
+                textAlign: 'center',
                 fontFamily: 'Montserrat'
               }}
             >
-              DASHBOARD
-            </Button>
-            <Button variant="outlined" href={DOCS_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
-              LEARN
-            </Button>
-            <Button variant="outlined" href={TG_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
-              TELEGRAM
-            </Button>
-            <Button target="_blank" variant="outlined" href={TWITTER_URL} sx={{ fontFamily: 'Montserrat' }}>
-              TWITTER
-            </Button>
-            <Button target="_blank" variant="outlined" href={ETHERSCAN_URL} sx={{ fontFamily: 'Montserrat' }}>
-              ETHERSCAN
-            </Button>
-            <Button variant="outlined" target="_blank" href={DEXT_URL} sx={{ fontFamily: 'Montserrat' }}>
-              CHART
-            </Button>
-            <Button variant="outlined" target="_blank" href={UNISWAP_URL} sx={{ fontFamily: 'Montserrat' }}>
-              UNISWAP
-            </Button>
-          </ButtonGroup>
-        </Grid>
-        {!isMd && (
-          <Grid item xs={12} md={8}>
-            <img src="agfiv2.png" alt="Aggregated Finance" width="100%" />
+              TOKENOMICS
+            </Typography>
           </Grid>
-        )}
-      </Grid>
-
-      <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
-        <Grid item xs={12} md={8}>
-          {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
-          <Typography variant="h2" sx={{ fontFamily: 'Montserrat' }}>
-            FINANCE, AGGREGATED.
-          </Typography>
-          <Typography variant="body1" sx={{ fontFamily: 'Montserrat' }} gutterBottom>
-            Farming-as-a-Service (FaaS) has ushered in a new era of DeFi. AGFI is setting ths standard for decentralized
-            FaaS, ensuring this emerging segment can maintain the <i>Decentralized</i> in <i>Decentralized Finance</i>.
-          </Typography>
-          <Button variant="outlined" href={DOCS_URL} target="_blank" color="secondary" startIcon={<SchoolIcon />}>
-            Learn More
-          </Button>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          {/* img max width */}
-          <img src="overview2.png" alt="Aggregated Finance" width="100%" />
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={2} justifyContent="center" textAlign="center" sx={{ my: 15 }}>
-        <Grid item xs={12}>
-          <Typography
-            variant="h2"
-            sx={{
-              textAlign: 'center',
-              fontFamily: 'Montserrat'
-            }}
-          >
-            TOKENOMICS
-          </Typography>
-        </Grid>
-        {/* <Grid item xs={12} paddingBottom={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          {/* <Grid item xs={12} paddingBottom={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <img src="token1.png" alt="Tokenomics" width="100%" />
         </Grid> */}
-        {[
-          {
-            title: 'ETH Rewards',
-            body: '3% of buy & sell volume paid directly to in ETH to token holders',
-            icon: <EmojiEventsIcon sx={{ fontSize: 64 }} />
-          },
-          {
-            title: 'Staking Rewards',
-            body: '3% of buy & sell volume distributed to stakers',
-            icon: <MilitaryTechIcon sx={{ fontSize: 64 }} />
-          },
-          {
-            title: 'Auto Burn',
-            body: '1% of sell volume automatically burned, with 36% supply already burned',
-            icon: <LocalFireDepartmentIcon sx={{ fontSize: 64 }} />
-          },
-          {
-            title: 'Stronger Treasury',
-            body: '4% of buy & sell volume funds the treasury',
-            icon: <AccountBalanceIcon sx={{ fontSize: 64 }} />
-          },
-          {
-            title: 'Operations',
-            body: '2% of buy & sell volume funds operational costs',
-            icon: <DnsIcon sx={{ fontSize: 64 }} />
-          },
-          {
-            title: 'Token Supply',
-            body: 'Fixed token supply of 1 Trillion AGFI',
-            icon: <InventoryIcon sx={{ fontSize: 64 }} />
-          },
-          {
-            title: 'Decentralized',
-            body: 'All AGFI is circulating with no presale or team allocations',
-            icon: <ChangeCircleIcon sx={{ fontSize: 64 }} />
-          }
-        ].map((item) => (
-          <Grid
-            key={item.title}
-            item
-            xs={12}
-            sm={3}
-            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}
-          >
-            <Stack>
-              <Typography variant="h6" component="span" sx={{ fontFamily: 'Montserrat' }}>
-                {item.title}
-              </Typography>
+          {[
+            {
+              title: 'ETH Rewards',
+              body: '3% of buy & sell volume paid directly to in ETH to token holders',
+              icon: <EmojiEventsIcon sx={{ fontSize: 64 }} />
+            },
+            {
+              title: 'Staking Rewards',
+              body: '3% of buy & sell volume distributed to stakers',
+              icon: <MilitaryTechIcon sx={{ fontSize: 64 }} />
+            },
+            {
+              title: 'Auto Burn',
+              body: '1% of sell volume automatically burned, with 36% supply already burned',
+              icon: <LocalFireDepartmentIcon sx={{ fontSize: 64 }} />
+            },
+            {
+              title: 'Stronger Treasury',
+              body: '4% of buy & sell volume funds the treasury',
+              icon: <AccountBalanceIcon sx={{ fontSize: 64 }} />
+            },
+            {
+              title: 'Operations',
+              body: '2% of buy & sell volume funds operational costs',
+              icon: <DnsIcon sx={{ fontSize: 64 }} />
+            },
+            {
+              title: 'Token Supply',
+              body: 'Fixed token supply of 1 Trillion AGFI',
+              icon: <InventoryIcon sx={{ fontSize: 64 }} />
+            },
+            {
+              title: 'Decentralized',
+              body: 'All AGFI is circulating with no presale or team allocations',
+              icon: <ChangeCircleIcon sx={{ fontSize: 64 }} />
+            }
+          ].map((item) => (
+            <Grid
+              key={item.title}
+              item
+              xs={12}
+              sm={3}
+              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}
+            >
+              <Stack>
+                <Typography variant="h6" component="span" sx={{ fontFamily: 'Montserrat' }}>
+                  {item.title}
+                </Typography>
 
-              <Box sx={{ border: 2, borderRadius: 2, p: 0.5, height: 350, maxWidth: 225 }}>
-                <Box
-                  sx={{
-                    p: 1,
-                    borderRadius: 2,
-                    height: '100%',
-                    background: 'linear-gradient(0deg, rgba(251,140,0,1) 0%, rgba(255,234,0,1) 100%)',
-                    verticalAlign: 'middle'
-                  }}
-                >
-                  <Typography variant="h5" color="black" sx={{ py: 3, height: 220, fontFamily: 'Montserrat' }}>
-                    <b>{item.body}</b>
-                  </Typography>
-                  {item.icon}
+                <Box sx={{ border: 2, borderRadius: 2, p: 0.5, height: 350, maxWidth: 225 }}>
+                  <Box
+                    sx={{
+                      p: 1,
+                      borderRadius: 2,
+                      height: '100%',
+                      background: 'linear-gradient(0deg, rgba(251,140,0,1) 0%, rgba(255,234,0,1) 100%)',
+                      verticalAlign: 'middle'
+                    }}
+                  >
+                    <Typography variant="h5" color="black" sx={{ py: 3, height: 220, fontFamily: 'Montserrat' }}>
+                      <b>{item.body}</b>
+                    </Typography>
+                    {item.icon}
+                  </Box>
                 </Box>
-              </Box>
-            </Stack>
-          </Grid>
-        ))}
-      </Grid>
+              </Stack>
+            </Grid>
+          ))}
+        </Grid>
 
-      <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
-        {!isMd && (
+        <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
+          {!isMd && (
+            <Grid item xs={12} md={8}>
+              <FeaturesTable />
+            </Grid>
+          )}
+          <Grid item xs={12} md={4}>
+            {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
+            <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Montserrat' }}>
+              UPGRADE TO THE NEXT LEVEL
+            </Typography>
+            <Typography variant="body1" sx={{ fontFamily: 'Montserrat' }}>
+              AGFI V1 built the foundation for a truly unique FaaS protocol. The new AGFI brings the next step of
+              absolute power to the community for rewards, growth, and voting.
+            </Typography>
+          </Grid>
+          {isMd && (
+            <Grid item xs={12} md={8}>
+              <FeaturesTable />
+            </Grid>
+          )}
+        </Grid>
+
+        <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
+          <Grid item xs={12} md={4}>
+            {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
+            <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Montserrat' }}>
+              COMMUNITY POWERED
+            </Typography>
+            <Typography variant="body1" sx={{ fontFamily: 'Montserrat' }}>
+              Your vote matters, controlling the AGFI treasury, the tokenomics, the taxes, the rewards, and much more.
+              The future of AGFI is controlled by <u>you</u>.
+            </Typography>
+          </Grid>
           <Grid item xs={12} md={8}>
-            <FeaturesTable />
+            {/* img max width */}
+            <img src="dao.png" alt="Aggregated Finance DAO" width="100%" />
           </Grid>
-        )}
-        <Grid item xs={12} md={4}>
-          {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
-          <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Montserrat' }}>
-            UPGRADE TO THE NEXT LEVEL
-          </Typography>
-          <Typography variant="body1" sx={{ fontFamily: 'Montserrat' }}>
-            AGFI V1 built the foundation for a truly unique FaaS protocol. The new AGFI brings the next step of absolute
-            power to the community for rewards, growth, and voting.
-          </Typography>
         </Grid>
-        {isMd && (
-          <Grid item xs={12} md={8}>
-            <FeaturesTable />
-          </Grid>
-        )}
-      </Grid>
 
-      <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
-        <Grid item xs={12} md={4}>
-          {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
-          <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Montserrat' }}>
-            COMMUNITY POWERED
-          </Typography>
-          <Typography variant="body1" sx={{ fontFamily: 'Montserrat' }}>
-            Your vote matters, controlling the AGFI treasury, the tokenomics, the taxes, the rewards, and much more. The
-            future of AGFI is controlled by <u>you</u>.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          {/* img max width */}
-          <img src="dao.png" alt="Aggregated Finance DAO" width="100%" />
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          {/* <Typography variant="h2" sx={{ textAlign: 'center', letterSpacing: '0.5rem', paddingBottom: 5 }}> */}
-          <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', fontFamily: 'Montserrat' }}>
-            LATEST NEWS
-          </Typography>
-        </Grid>
-        {blogPosts.map((post) => (
-          <Grid item key={post.id} xs={12} md={6}>
-            <Card sx={{ minHeight: 450 }}>
-              <CardActionArea href={post.url} target="_blank">
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={post.feature_image || 'post-default.png'}
-                  alt="Feature Image"
-                />
-                <CardContent>
-                  <Typography variant="h4" paddingBottom sx={{ fontFamily: 'Montserrat' }}>
-                    {post.title}
-                  </Typography>
-                  {post.tags &&
-                    post.tags.map((tag) => (
-                      <Chip key={tag.id} label={tag.name} size="small" sx={{ fontFamily: 'Montserrat' }} />
-                    ))}
-                  <Typography variant="body1" paddingTop sx={{ fontFamily: 'Montserrat' }}>
-                    {post.excerpt && post.excerpt.length <= 150 ? post.excerpt : `${post.excerpt.slice(0, 150)}...`}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            {/* <Typography variant="h2" sx={{ textAlign: 'center', letterSpacing: '0.5rem', paddingBottom: 5 }}> */}
+            <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', fontFamily: 'Montserrat' }}>
+              LATEST NEWS
+            </Typography>
           </Grid>
-        ))}
-      </Grid>
-    </Container>
+          {blogPosts.map((post) => (
+            <Grid item key={post.id} xs={12} md={6}>
+              <Card sx={{ minHeight: 450 }}>
+                <CardActionArea href={post.url} target="_blank">
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={post.feature_image || 'post-default.png'}
+                    alt="Feature Image"
+                  />
+                  <CardContent>
+                    <Typography variant="h4" paddingBottom sx={{ fontFamily: 'Montserrat' }}>
+                      {post.title}
+                    </Typography>
+                    {post.tags &&
+                      post.tags.map((tag) => (
+                        <Chip key={tag.id} label={tag.name} size="small" sx={{ fontFamily: 'Montserrat' }} />
+                      ))}
+                    <Typography variant="body1" paddingTop sx={{ fontFamily: 'Montserrat' }}>
+                      {post.excerpt && post.excerpt.length <= 150 ? post.excerpt : `${post.excerpt.slice(0, 150)}...`}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+      {/* </Container> */}
+    </div>
   );
 }
 

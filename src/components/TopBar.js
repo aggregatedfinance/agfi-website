@@ -100,17 +100,17 @@ function TopBar() {
             </Typography>
           </Box>
         )}
-        {false && (
-          <IconButton sx={{ mx: 1 }} onClick={colorMode.toggleColorMode} color="inherit" disabled>
-            {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
-        )}
-        <ButtonGroup variant="contained" color="secondary">
-          {!account && <Button onClick={handleConnect}>Connect</Button>}
-          <Button target="_blank" href={UNISWAP_URL}>
-            Buy AGFI
+        <IconButton sx={{ mx: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+          {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
+        <Button target="_blank" href={UNISWAP_URL} color="secondary" variant="text">
+          Buy AGFI
+        </Button>
+        {!account && (
+          <Button onClick={handleConnect} color="primary" variant="contained" sx={{ mx: 1 }}>
+            Connect
           </Button>
-        </ButtonGroup>
+        )}
       </Toolbar>
     </AppBar>
   );

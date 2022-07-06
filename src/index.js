@@ -5,6 +5,8 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 import { SubgraphProvider } from './SubgraphProvider';
 
+import './index.css';
+
 ReactDOM.render(
   <SubgraphProvider>
     <DAppProvider>
