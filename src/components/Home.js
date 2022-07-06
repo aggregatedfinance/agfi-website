@@ -115,74 +115,82 @@ function Home() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
           height: '100vh'
         }}
       >
-        <Container maxWidth="xl" sx={{ position: 'absolute', top: '50%', margin: 0, transform: 'translateY(-50%)' }}>
-          <Grid container justifyContent="center" direction={isMd ? 'column-reverse' : 'reverse'}>
-            <Grid item xs={12} md={4} textAlign={isMd ? 'center' : 'left'}>
-              <Typography
-                variant="h4"
-                gutterBottom
-                sx={{ lineHeight: 0, letterSpacing: '0.2rem', fontFamily: 'Montserrat' }}
-              >
-                JOIN THE FUTURE OF
+        <Container maxWidth="xl">
+          <Box sx={{ position: 'absolute', top: '50%', my: 0, transform: 'translateY(-50%)' }}>
+            <Grid container justifyContent="center" direction={isMd ? 'column-reverse' : 'reverse'}>
+              <Grid item xs={12} md={4} textAlign={isMd ? 'center' : 'left'}>
                 <Typography
-                  component="span"
-                  variant="h2"
+                  variant="h4"
                   gutterBottom
-                  sx={{
-                    letterSpacing: '0.4rem',
-                    color: theme.palette.primary.main,
-                    fontFamily: 'Montserrat'
-                  }}
+                  sx={{ lineHeight: 0, letterSpacing: '0.2rem', fontFamily: 'Montserrat' }}
                 >
-                  {' '}
-                  COMMUNITY POWERED INVESTING
+                  JOIN THE FUTURE OF
+                  <Typography
+                    component="span"
+                    variant="h2"
+                    gutterBottom
+                    sx={{
+                      letterSpacing: '0.4rem',
+                      color: theme.palette.primary.main,
+                      fontFamily: 'Montserrat'
+                    }}
+                  >
+                    {' '}
+                    COMMUNITY POWERED INVESTING
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body1" sx={{ paddingBottom: 3, fontFamily: 'Montserrat' }} gutterBottom>
-                AGFI leads the world of <u>truly</u> decentralized investing by leveraging the power of
-                Farming-as-a-Service. Hold to grow your portfolio. Vote to control the treasury. The future rests with{' '}
-                <u>you</u>.
-              </Typography>
-              <ButtonGroup sx={{ my: 2 }} orientation={isMd ? 'vertical' : 'horizontal'} size="large" fullWidth={isMd}>
-                <Button
-                  variant="contained"
-                  href="/#/dashboard"
-                  startIcon={<DashboardIcon />}
-                  sx={{
-                    background: 'linear-gradient(45deg, #CE800D 30%, #f7e51a 90%)',
-                    color: '#000',
-                    fontFamily: 'Montserrat'
-                  }}
+                <Typography variant="body1" sx={{ paddingBottom: 3, fontFamily: 'Montserrat' }} gutterBottom>
+                  AGFI leads the world of <u>truly</u> decentralized investing by leveraging the power of
+                  Farming-as-a-Service. Hold to grow your portfolio. Vote to control the treasury. The future rests with{' '}
+                  <u>you</u>.
+                </Typography>
+                <ButtonGroup
+                  sx={{ my: 2 }}
+                  orientation={isMd ? 'vertical' : 'horizontal'}
+                  size="large"
+                  fullWidth={isMd}
                 >
-                  DASHBOARD
-                </Button>
-                <Button variant="outlined" href={DOCS_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
-                  LEARN
-                </Button>
-                <Button variant="outlined" href={TG_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
-                  TELEGRAM
-                </Button>
-                <Button target="_blank" variant="outlined" href={TWITTER_URL} sx={{ fontFamily: 'Montserrat' }}>
-                  TWITTER
-                </Button>
-                <Button target="_blank" variant="outlined" href={ETHERSCAN_URL} sx={{ fontFamily: 'Montserrat' }}>
-                  ETHERSCAN
-                </Button>
-                <Button variant="outlined" target="_blank" href={DEXT_URL} sx={{ fontFamily: 'Montserrat' }}>
-                  CHART
-                </Button>
-                <Button variant="outlined" target="_blank" href={UNISWAP_URL} sx={{ fontFamily: 'Montserrat' }}>
-                  UNISWAP
-                </Button>
-              </ButtonGroup>
+                  <Button
+                    variant="contained"
+                    href="/#/dashboard"
+                    startIcon={<DashboardIcon />}
+                    sx={{
+                      background: 'linear-gradient(45deg, #CE800D 30%, #f7e51a 90%)',
+                      color: '#000',
+                      fontFamily: 'Montserrat'
+                    }}
+                  >
+                    DASHBOARD
+                  </Button>
+                  <Button variant="outlined" href={DOCS_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
+                    LEARN
+                  </Button>
+                  <Button variant="outlined" href={TG_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
+                    TELEGRAM
+                  </Button>
+                  <Button target="_blank" variant="outlined" href={TWITTER_URL} sx={{ fontFamily: 'Montserrat' }}>
+                    TWITTER
+                  </Button>
+                  <Button target="_blank" variant="outlined" href={ETHERSCAN_URL} sx={{ fontFamily: 'Montserrat' }}>
+                    ETHERSCAN
+                  </Button>
+                  <Button variant="outlined" target="_blank" href={DEXT_URL} sx={{ fontFamily: 'Montserrat' }}>
+                    CHART
+                  </Button>
+                  <Button variant="outlined" target="_blank" href={UNISWAP_URL} sx={{ fontFamily: 'Montserrat' }}>
+                    UNISWAP
+                  </Button>
+                </ButtonGroup>
+              </Grid>
+              <Grid item xs={12} md={8} textAlign="center">
+                <img src="agfiv2.png" alt="Aggregated Finance" width={isMd ? 256 : 512} height={isMd ? 256 : 512} />
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={8} textAlign={isMd ? 'center' : 'right'}>
-              <img src="agfiv2.png" alt="Aggregated Finance" width={isMd ? 256 : 512} height={isMd ? 256 : 512} />
-            </Grid>
-          </Grid>
+          </Box>
         </Container>
       </div>
       <Container maxWidth="lg">
