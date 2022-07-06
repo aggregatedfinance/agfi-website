@@ -86,7 +86,8 @@ function a11yProps(mode) {
   };
 }
 
-function Dashboard() {
+function Dashboard(props) {
+  const { colorMode } = props;
   const { account } = useEthers();
 
   const agfiBalance = useTokenBalance(AGFI_ADDRESS, account);
@@ -245,7 +246,7 @@ function Dashboard() {
 
   return (
     <>
-      <TopBar />
+      <TopBar colorMode={colorMode} />
       <Container maxWidth="md">
         <Grid container spacing={1} sx={{ my: 2 }}>
           {!account && (

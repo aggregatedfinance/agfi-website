@@ -5,8 +5,11 @@ import numeral from 'numeral';
 
 export function fCurrency(number) {
   const toReturn = numeral(number);
-  if (toReturn === 'NaN' || !Number.isInteger(number)) {
+  if (toReturn === 'NaN') {
     return numeral(0).format('$0.00');
+  }
+  if (toReturn % 1 !== 0) {
+    return toReturn.format('$0,0.00');
   }
   return toReturn.format(Number.isInteger(number) ? '$0,0' : '$0,0.00');
 }

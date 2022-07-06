@@ -1,25 +1,12 @@
 import { createContext, useState, useMemo } from 'react';
 import { CssBaseline } from '@mui/material';
-import { useRoutes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { yellow, orange, lightGreen, red, deepOrange } from '@mui/material/colors';
 
 import { Dashboard, Home, Footer } from './components';
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
-
-function Router() {
-  return useRoutes([
-    {
-      path: '/',
-      element: <Home />
-    },
-    {
-      path: 'dashboard',
-      element: <Dashboard />
-    }
-  ]);
-}
 
 export default function App() {
   const [mode, setMode] = useState('dark');
@@ -61,8 +48,11 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <>
           <CssBaseline />
-          <Router />
-          <Footer />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="dashboard" element={<Dashboard colorMode={colorMode} />} />
+          </Routes>
+          <Footer colorMode={colorMode} />
         </>
       </ThemeProvider>
     </ColorModeContext.Provider>

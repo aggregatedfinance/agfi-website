@@ -1,5 +1,5 @@
-import { createContext, useEffect, useContext } from 'react';
-import { AppBar, Toolbar, Typography, Button, ButtonGroup, Box, IconButton } from '@mui/material';
+import { useEffect } from 'react';
+import { AppBar, Toolbar, Typography, Button, Box, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -9,8 +9,6 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import Fortmatic from 'fortmatic';
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import { UNISWAP_URL } from '../config';
-
-const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const infuraId = 'dab56da72e89492da5a8e77fbc45c7fa';
 
@@ -52,9 +50,9 @@ const web3Modal = new Web3Modal({
   providerOptions
 });
 
-function TopBar() {
+function TopBar(props) {
+  const { colorMode } = props;
   const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
 
   const { account, activate, chainId, activateBrowserWallet } = useEthers();
 

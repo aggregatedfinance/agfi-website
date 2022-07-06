@@ -111,7 +111,7 @@ function Home() {
       {/* <Container> */}
       <div
         style={{
-          background: 'url(BG2.jpg)',
+          background: theme.palette.mode === 'dark' ? 'url(hero-bg-dark.jpg)' : 'url(hero-bg-white.jpg)',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
@@ -151,6 +151,7 @@ function Home() {
                 <ButtonGroup
                   sx={{ my: 2 }}
                   orientation={isMd ? 'vertical' : 'horizontal'}
+                  variant={theme.palette.mode === 'dark' ? 'outlined' : 'contained'}
                   size="large"
                   fullWidth={isMd}
                 >
@@ -166,22 +167,22 @@ function Home() {
                   >
                     DASHBOARD
                   </Button>
-                  <Button variant="outlined" href={DOCS_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
+                  <Button target="_blank" href={DOCS_URL} sx={{ fontFamily: 'Montserrat' }}>
                     LEARN
                   </Button>
-                  <Button variant="outlined" href={TG_URL} target="_blank" sx={{ fontFamily: 'Montserrat' }}>
+                  <Button target="_blank" href={TG_URL} sx={{ fontFamily: 'Montserrat' }}>
                     TELEGRAM
                   </Button>
-                  <Button target="_blank" variant="outlined" href={TWITTER_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  <Button target="_blank" href={TWITTER_URL} sx={{ fontFamily: 'Montserrat' }}>
                     TWITTER
                   </Button>
-                  <Button target="_blank" variant="outlined" href={ETHERSCAN_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  <Button target="_blank" href={ETHERSCAN_URL} sx={{ fontFamily: 'Montserrat' }}>
                     ETHERSCAN
                   </Button>
-                  <Button variant="outlined" target="_blank" href={DEXT_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  <Button target="_blank" href={DEXT_URL} sx={{ fontFamily: 'Montserrat' }}>
                     CHART
                   </Button>
-                  <Button variant="outlined" target="_blank" href={UNISWAP_URL} sx={{ fontFamily: 'Montserrat' }}>
+                  <Button target="_blank" href={UNISWAP_URL} sx={{ fontFamily: 'Montserrat' }}>
                     UNISWAP
                   </Button>
                 </ButtonGroup>
@@ -211,7 +212,7 @@ function Home() {
           </Grid>
           <Grid item xs={12} md={4}>
             {/* img max width */}
-            <img src="overview2.png" alt="Aggregated Finance" width="100%" />
+            <img src="agfiv2.png" alt="Aggregated Finance" width="100%" />
           </Grid>
         </Grid>
 

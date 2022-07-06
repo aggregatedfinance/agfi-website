@@ -1,13 +1,22 @@
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, IconButton, Box } from '@mui/material';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { useTheme } from '@mui/material/styles';
 
-export default function Footer() {
+export default function Footer(props) {
+  const { colorMode } = props;
+  const theme = useTheme();
   return (
     <Container maxWidth="md">
+      <Box textAlign="center" sx={{ mt: 5, mb: 2 }}>
+        <IconButton sx={{ mx: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+          {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
+      </Box>
       <Typography
         variant="body1"
         component="p"
         sx={{
-          mt: 10,
           pb: 2,
           fontSize: 13,
           textAlign: { xs: 'center' }
