@@ -24,9 +24,10 @@ import { useEthers, useTokenBalance, useTokenAllowance } from '@usedapp/core';
 import TransactionStatus from './dashboard/TransactionStatus';
 import ContractData from './dashboard/ContractData';
 import Links from './dashboard/Links';
+import BurnData from './dashboard/BurnData';
 import { fNumber, fCurrency, fNumberWithDecimals, fPercent } from '../formatNumber';
 import { useUniswapPriceData } from '../uniswap';
-import { getTokenSupply } from '../etherscan';
+import { getTokenSupply, getBurns } from '../etherscan';
 import {
   useApprove,
   useClaim,
@@ -109,6 +110,7 @@ function Dashboard(props) {
   const [unstakeAmount, setUnstakeAmount] = useState(0);
   const [actualStakeAmount, setActualStakeAmount] = useState(0);
   const [actualUnstakeAmount, setActualUnstakeAmount] = useState(0);
+  const [burnEvents, setBurnEvents] = useState([]);
 
   const accountInfo = useGetAccountInfo(account);
   const stakingInfo = useGetStakingInfo(account);
@@ -120,6 +122,18 @@ function Dashboard(props) {
   const { state: withdrawState, send: withdrawSend, resetState: withdrawResetState } = useWithdraw();
   const { state: depositState, send: depositSend, resetState: depositResetState } = useDeposit();
   const { state: approveState, send: approveSend, resetState: approveResetState } = useApprove();
+
+  useEffect(() => {
+    async function getData() {
+      const response = await getBurns(AGFI_ADDRESS);
+      if (response.data && response.data.operations) {
+        setBurnEvents(response.data.operations);
+      }
+    }
+    if (burnEvents.length === 0) {
+      getData();
+    }
+  }, [burnEvents]);
 
   useEffect(() => {
     async function getData() {
@@ -687,6 +701,11 @@ function Dashboard(props) {
           {account && (
             <Grid item xs={12}>
               <ContractData priceData={priceData} ethPrice={ethPrice} />
+            </Grid>
+          )}
+          {burnEvents && (
+            <Grid item xs={12}>
+              <BurnData burnEvents={burnEvents} />
             </Grid>
           )}
           <Grid item xs={12}>

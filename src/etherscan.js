@@ -33,6 +33,32 @@ export async function getTransactions(addr, contractAddr) {
   }
 }
 
+export async function getBurns(contractAddr) {
+  try {
+    await delay(); // to try to stop rate limiting by etherscan
+    const response = await axios.get(
+      `https://api.ethplorer.io/getAddressHistory/${contractAddr}?type=burn&apiKey=freekey`
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
+export async function getTotalSupplyAt(blockNumber, contractAddr) {
+  try {
+    await delay(); // to try to stop rate limiting by etherscan
+    const response = await axios.get(
+      `https://api.etherscan.io/api?module=stats&action=tokensupplyhistory&contractAddress=${contractAddr}&blockno=${blockNumber}&apikey=43MJ15K85GHRQEDAKK227QZVSTY2BVEP6T`
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
 export async function getBuys() {
   try {
     await delay(); // to try to stop rate limiting by etherscan
