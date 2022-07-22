@@ -13,14 +13,17 @@ import {
   Stack,
   Typography,
   Alert,
-  AlertTitle
+  AlertTitle,
+  useTheme
 } from '@mui/material';
 import { BigNumber } from 'ethers';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DoneIcon from '@mui/icons-material/Done';
+import moment from 'moment';
 import { formatUnits, parseUnits } from '@ethersproject/units';
 import { useCoingeckoPrice } from '@usedapp/coingecko';
 import { useEthers, useTokenBalance, useTokenAllowance } from '@usedapp/core';
+import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area, ResponsiveContainer, Legend } from 'recharts';
 
 import TransactionStatus from './dashboard/TransactionStatus';
 import ContractData from './dashboard/ContractData';
@@ -44,6 +47,13 @@ import { AGFI_ADDRESS, STAKING_ADDRESS, DEPLOYER_ADDRESS, LAUNCH_SUPPLY, TREASUR
 import TopBar from './TopBar';
 
 const startingSupply = BigNumber.from(LAUNCH_SUPPLY);
+
+const supplyHistory = [
+  { timestamp: 1651756352000, supply: 1000 },
+  { timestamp: 1651844460000, supply: 731.66 },
+  { timestamp: 1651932697000, supply: 634.15 },
+  { timestamp: 1657972403000, supply: 633.33 }
+];
 
 const isStateLoading = (txnState) => {
   console.log(txnState);
@@ -91,6 +101,7 @@ function a11yProps(mode) {
 function Dashboard(props) {
   const { colorMode } = props;
   const { account } = useEthers();
+  const theme = useTheme();
 
   const agfiBalance = useTokenBalance(AGFI_ADDRESS, account);
   const deployerBalance = useTokenBalance(AGFI_ADDRESS, DEPLOYER_ADDRESS);
@@ -407,6 +418,31 @@ function Dashboard(props) {
               </Box>
             </Grid>
           )}
+          <Grid item xs={12}>
+            <ResponsiveContainer width="100%" height={350}>
+              <AreaChart data={supplyHistory} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor={theme.palette.secondary.main} stopOpacity={0.9} />
+                    <stop offset="95%" stopColor={theme.palette.secondary.main} stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" tickFormatter={(tstamp) => moment(tstamp).fromNow()} />
+                <YAxis />
+                <Tooltip />
+                <Legend verticalAlign="top" height={36} />
+                <Area
+                  name="Total Supply (in billions)"
+                  type="monotone"
+                  dataKey="supply"
+                  stroke={theme.palette.secondary.main}
+                  fillOpacity={1}
+                  fill="url(#colorUv)"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </Grid>
           {account && (
             <Grid item xs={12}>
               <Card sx={{ display: 'flex', p: 2, borderRadius: 0 }}>
