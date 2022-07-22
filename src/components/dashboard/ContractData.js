@@ -11,7 +11,7 @@ import {
   Card
 } from '@mui/material';
 import { formatUnits } from '@ethersproject/units';
-import { fNumber, fCurrency } from '../../formatNumber';
+import { fShortenNumber, fCurrency } from '../../formatNumber';
 import { useGetSingleValue } from '../../hooks';
 
 export default function ContractData({ priceData, ethPrice }) {
@@ -61,7 +61,7 @@ export default function ContractData({ priceData, ethPrice }) {
           collects.
         </Typography>
         <TableContainer>
-          <Table sx={{ minWidth: 650, borderRadius: 0 }} aria-label="tax channels table" size="small">
+          <Table sx={{ minWidth: 650, borderRadius: 0.5, width: '100%' }} aria-label="tax channels table" size="small">
             <TableHead>
               <TableRow>
                 <TableCell>Channel Name</TableCell>
@@ -86,20 +86,30 @@ export default function ContractData({ priceData, ethPrice }) {
                   </TableCell>
                   <TableCell align="center">
                     {row.buyFee ? (
-                      <Chip variant="outlined" label={`${row.buyFee / 100}%`} color="primary" size="small" />
+                      <Chip
+                        label={`${row.buyFee / 100}%`}
+                        color="primary"
+                        size="small"
+                        sx={{ borderRadius: 0.5, width: '100%' }}
+                      />
                     ) : (
                       'Loading...'
                     )}
                   </TableCell>
                   <TableCell align="center">
                     {row.sellFee ? (
-                      <Chip variant="outlined" label={`${row.sellFee / 100}%`} color="primary" size="small" />
+                      <Chip
+                        label={`${row.sellFee / 100}%`}
+                        color="primary"
+                        size="small"
+                        sx={{ borderRadius: 0.5, width: '100%' }}
+                      />
                     ) : (
                       'Loading...'
                     )}
                   </TableCell>
                   <TableCell align="right">
-                    {row.bal ? `${fNumber(formatUnits(row.bal || 0, 9))}` : 'Loading...'}
+                    {row.bal ? `${fShortenNumber(formatUnits(row.bal || 0, 9))} AGFI` : 'Loading...'}
                   </TableCell>
                   <TableCell align="right">
                     {row.bal && ethPrice && priceData
@@ -108,7 +118,12 @@ export default function ContractData({ priceData, ethPrice }) {
                   </TableCell>
                   <TableCell align="center">
                     {typeof swapIndex === 'number' && idx === swapIndex ? (
-                      <Chip label="Swapping Next" color="success" size="small" />
+                      <Chip
+                        label="Swapping Next"
+                        color="success"
+                        size="small"
+                        sx={{ borderRadius: 0.5, width: '100%' }}
+                      />
                     ) : (
                       ''
                     )}
@@ -145,9 +160,9 @@ export default function ContractData({ priceData, ethPrice }) {
                 </TableCell>
                 <TableCell align="center">
                   {swapC1Enabled ? (
-                    <Chip variant="outlined" label="Enabled" color="success" size="small" />
+                    <Chip label="Enabled" color="success" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   ) : (
-                    <Chip variant="outlined" label="Disabled" color="warning" size="small" />
+                    <Chip label="Disabled" color="warning" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   )}
                 </TableCell>
                 <TableCell align="center" />
@@ -161,13 +176,22 @@ export default function ContractData({ priceData, ethPrice }) {
                 </TableCell>
                 <TableCell align="center">
                   {swapC2Enabled ? (
-                    <Chip variant="outlined" label="Enabled" color="success" size="small" />
+                    <Chip label="Enabled" color="success" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   ) : (
-                    <Chip variant="outlined" label="Disabled" color="warning" size="small" />
+                    <Chip label="Disabled" color="warning" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   )}
                 </TableCell>
                 <TableCell align="center">
-                  {c2BurningEnabled ? <Chip label="Burning Enabled" color="success" size="small" /> : ''}
+                  {c2BurningEnabled ? (
+                    <Chip
+                      label="Burning Enabled"
+                      color="success"
+                      size="small"
+                      sx={{ borderRadius: 0.5, width: '100%' }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </TableCell>
                 {c2BurningEnabled ? (
                   <TableCell align="center" sx={{ fontFamily: 'Roboto Mono' }}>
@@ -185,13 +209,22 @@ export default function ContractData({ priceData, ethPrice }) {
                 </TableCell>
                 <TableCell align="center">
                   {swapC3Enabled ? (
-                    <Chip variant="outlined" label="Enabled" color="success" size="small" />
+                    <Chip label="Enabled" color="success" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   ) : (
-                    <Chip variant="outlined" label="Disabled" color="warning" size="small" />
+                    <Chip label="Disabled" color="warning" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   )}
                 </TableCell>
                 <TableCell align="center">
-                  {c3RewardsEnabled ? <Chip label="Rewards Enabled" color="success" size="small" /> : ''}
+                  {c3RewardsEnabled ? (
+                    <Chip
+                      label="Rewards Enabled"
+                      color="success"
+                      size="small"
+                      sx={{ borderRadius: 0.5, width: '100%' }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </TableCell>
                 {c3RewardsEnabled ? (
                   <TableCell align="center" sx={{ fontFamily: 'Roboto Mono' }}>
@@ -209,9 +242,9 @@ export default function ContractData({ priceData, ethPrice }) {
                 </TableCell>
                 <TableCell align="center">
                   {swapC4Enabled ? (
-                    <Chip variant="outlined" label="Enabled" color="success" size="small" />
+                    <Chip label="Enabled" color="success" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   ) : (
-                    <Chip variant="outlined" label="Disabled" color="warning" size="small" />
+                    <Chip label="Disabled" color="warning" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   )}
                 </TableCell>
                 <TableCell align="center" />
@@ -225,9 +258,9 @@ export default function ContractData({ priceData, ethPrice }) {
                 </TableCell>
                 <TableCell align="center">
                   {swapC5Enabled ? (
-                    <Chip variant="outlined" label="Enabled" color="success" size="small" />
+                    <Chip label="Enabled" color="success" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   ) : (
-                    <Chip variant="outlined" label="Disabled" color="warning" size="small" />
+                    <Chip label="Disabled" color="warning" size="small" sx={{ borderRadius: 0.5, width: '100%' }} />
                   )}
                 </TableCell>
                 <TableCell align="center" />

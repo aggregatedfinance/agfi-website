@@ -10,6 +10,7 @@ import {
   Tab,
   Tabs,
   TextField,
+  Stack,
   Typography,
   Alert,
   AlertTitle
@@ -427,11 +428,12 @@ function Dashboard(props) {
                       {fCurrency(formatUnits(accountInfo.withdrawableRewards || 0, 18) * ethPrice)} USD
                     </Typography>
                   )}
-                  <ButtonGroup size="large" orientation="horizontal" fullWidth color="primary">
+                  <ButtonGroup size="large" orientation="horizontal" fullWidth>
                     <Button
                       onClick={onClickClaim}
                       disabled={isLoadingClaim || isLoadingCompound}
                       variant="contained"
+                      color="primary"
                       sx={{ borderRadius: 0 }}
                     >
                       Claim ETH
@@ -440,6 +442,7 @@ function Dashboard(props) {
                       onClick={onClickCompound}
                       disabled={isLoadingClaim || isLoadingCompound}
                       variant="outlined"
+                      color="secondary"
                       sx={{ borderRadius: 0 }}
                     >
                       Swap to AGFI
@@ -506,153 +509,162 @@ function Dashboard(props) {
                     </Tabs>
                   </Box>
                   <TabPanel value={tabIndex} index={0} sx={{ marginBottom: 2 }}>
-                    <Typography variant="h4" textAlign="center" gutterBottom>
-                      Staking
-                    </Typography>
-                    <Typography variant="body2" textAlign="center" gutterBottom>
-                      Stake AGFI to earn a percentage of all AGFI swaps on Uniswap. The yield is not fixed and scales
-                      according to how much trading volume there is. If you want to claim your ETH rewards as well, just
-                      unstake and claim those separately.
-                    </Typography>
-                    <Typography variant="body2" textAlign="center" sx={{ color: 'text.secondary' }}>
-                      Your Unstaked Balance
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontFamily: 'Roboto' }} textAlign="center">
-                      {fNumber(formatUnits(agfiBalance || 0, 9))} AGFI
-                    </Typography>
-                    <Box sx={{ margin: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                      <TextField
-                        label="Amount to Stake"
-                        value={stakeAmount}
-                        onChange={handleChangeToStake}
-                        variant="standard"
-                        color="primary"
-                        InputProps={{
-                          endAdornment: <InputAdornment position="start">AGFI</InputAdornment>,
-                          inputMode: 'numeric'
-                        }}
-                      />
-                    </Box>
-                    <ButtonGroup variant="outlined" fullWidth size="large">
-                      <Button
-                        onClick={(e) => handleClickToStakePercentage(e, 100)}
-                        disabled={isLoadingDeposit || isLoadingApprove}
-                        sx={{ borderRadius: 0 }}
-                      >
-                        ALL
-                      </Button>
-                      <Button
-                        onClick={onClickApprove}
-                        variant="contained"
-                        disabled={stakingAllowance >= actualStakeAmount || isLoadingDeposit || isLoadingApprove}
-                        startIcon={<DoneIcon />}
-                        sx={{ borderRadius: 0 }}
-                      >
-                        APPROVE
-                      </Button>
-                      <Button
-                        onClick={onClickStake}
-                        variant="contained"
-                        disabled={
-                          stakingAllowance < actualStakeAmount ||
-                          stakeAmount < 1 ||
-                          isLoadingDeposit ||
-                          isLoadingApprove
-                        }
-                        startIcon={<AddBoxIcon />}
-                        sx={{ borderRadius: 0 }}
-                      >
-                        STAKE
-                      </Button>
-                    </ButtonGroup>
-                    <Typography variant="body2" textAlign="center" sx={{ marginTop: 2 }}>
-                      If you stake AGFI, you cannot vote in the DAO. Only unstaked and delegated tokens can vote on
-                      proposals.
-                    </Typography>
+                    <Stack spacing={1}>
+                      <Typography variant="h4" textAlign="center">
+                        Staking
+                      </Typography>
+                      <Typography variant="body2" textAlign="center">
+                        Stake AGFI to earn a percentage of all AGFI swaps on Uniswap. The yield is not fixed and scales
+                        according to how much trading volume there is. If you want to claim your ETH rewards as well,
+                        just unstake and claim those separately.
+                      </Typography>
+                      <Typography variant="body2" textAlign="center" sx={{ color: 'text.secondary' }}>
+                        Your Unstaked Balance
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontFamily: 'Roboto' }} textAlign="center">
+                        {fNumber(formatUnits(agfiBalance || 0, 9))} AGFI
+                      </Typography>
+                      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <TextField
+                          label="Amount to Stake"
+                          value={stakeAmount}
+                          onChange={handleChangeToStake}
+                          variant="standard"
+                          color="primary"
+                          InputProps={{
+                            endAdornment: <InputAdornment position="start">AGFI</InputAdornment>,
+                            inputMode: 'numeric'
+                          }}
+                        />
+                      </Box>
+                      <Alert severity="warning">
+                        <AlertTitle>Staking Disabled</AlertTitle>A recent DAO vote decided to turn off staking rewards.
+                        No tokens are currently being sent to anyone staked. If you have staked AGFI, it is best to
+                        unstake it so you can vote in future DAO proposals.
+                      </Alert>
+                      <ButtonGroup variant="outlined" fullWidth size="large">
+                        <Button
+                          onClick={(e) => handleClickToStakePercentage(e, 100)}
+                          disabled={isLoadingDeposit || isLoadingApprove}
+                          sx={{ borderRadius: 0 }}
+                        >
+                          ALL
+                        </Button>
+                        <Button
+                          onClick={onClickApprove}
+                          variant="contained"
+                          disabled={stakingAllowance >= actualStakeAmount || isLoadingDeposit || isLoadingApprove}
+                          startIcon={<DoneIcon />}
+                          sx={{ borderRadius: 0 }}
+                        >
+                          APPROVE
+                        </Button>
+                        <Button
+                          onClick={onClickStake}
+                          variant="contained"
+                          disabled={
+                            stakingAllowance < actualStakeAmount ||
+                            stakeAmount < 1 ||
+                            isLoadingDeposit ||
+                            isLoadingApprove
+                          }
+                          startIcon={<AddBoxIcon />}
+                          sx={{ borderRadius: 0 }}
+                        >
+                          STAKE
+                        </Button>
+                      </ButtonGroup>
+                      <Typography variant="body2" textAlign="center" sx={{ marginTop: 2 }}>
+                        If you stake AGFI, you cannot vote in the DAO. Only unstaked and delegated tokens can vote on
+                        proposals.
+                      </Typography>
+                    </Stack>
                   </TabPanel>
 
                   <TabPanel value={tabIndex} index={1} sx={{ marginBottom: 2 }}>
-                    <Typography variant="body2" textAlign="center">
-                      Your Staked Balance
-                    </Typography>
-                    <Typography variant="h5" sx={{ fontFamily: 'Roboto' }} textAlign="center">
-                      {fNumber(formatUnits(stakingInfo.depositedAmount || 0, 9))} AGFI
-                    </Typography>
-                    {stakingInfo && priceData && priceData.token && (
-                      <Typography
-                        variant="body2"
-                        sx={{ fontFamily: 'Roboto', color: 'text.secondary' }}
-                        textAlign="center"
-                      >
-                        $
-                        {fNumber(
-                          formatUnits(stakingInfo.depositedAmount || 0, 9) * priceData.token.derivedETH * ethPrice
-                        )}
+                    <Stack spacing={1}>
+                      <Typography variant="body2" textAlign="center">
+                        Your Staked Balance
                       </Typography>
-                    )}
-                    <Typography variant="body2" textAlign="center">
-                      Your Pending Rewards
-                    </Typography>
-                    {pendingReward && (
                       <Typography variant="h5" sx={{ fontFamily: 'Roboto' }} textAlign="center">
-                        {fNumber(formatUnits(pendingReward || 0, 9))} AGFI
+                        {fNumber(formatUnits(stakingInfo.depositedAmount || 0, 9))} AGFI
                       </Typography>
-                    )}
-                    {pendingReward && priceData && priceData.token && (
-                      <Typography
-                        variant="body2"
-                        sx={{ fontFamily: 'Roboto', color: 'text.secondary' }}
-                        textAlign="center"
-                        gutterBottom
-                      >
-                        ${fNumber(formatUnits(pendingReward || 0, 9) * priceData.token.derivedETH * ethPrice)} USD
+                      {stakingInfo && priceData && priceData.token && (
+                        <Typography
+                          variant="body2"
+                          sx={{ fontFamily: 'Roboto', color: 'text.secondary' }}
+                          textAlign="center"
+                        >
+                          $
+                          {fNumber(
+                            formatUnits(stakingInfo.depositedAmount || 0, 9) * priceData.token.derivedETH * ethPrice
+                          )}
+                        </Typography>
+                      )}
+                      <Typography variant="body2" textAlign="center">
+                        Your Pending Rewards
                       </Typography>
-                    )}
-                    <Box sx={{ margin: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                      <TextField
-                        label="Amount to Unstake"
-                        value={unstakeAmount}
-                        onChange={handleChangeToUnstake}
-                        variant="standard"
-                        color="primary"
-                        InputProps={{
-                          endAdornment: <InputAdornment position="start">AGFI</InputAdornment>,
-                          inputMode: 'numeric'
-                        }}
-                      />
-                    </Box>
-                    <ButtonGroup variant="outlined" fullWidth size="large">
-                      <Button
-                        onClick={(e) => handleClickToUnstakePercentage(e, 100)}
-                        disabled={isLoadingWithdraw}
-                        sx={{ borderRadius: 0 }}
-                      >
-                        ALL
-                      </Button>
-                      <Button
-                        onClick={onClickUnstake}
-                        variant="contained"
-                        sx={{ borderRadius: 0 }}
-                        disabled={isLoadingWithdraw || actualUnstakeAmount < 1}
-                      >
-                        UNSTAKE
-                      </Button>
-                      <Button
-                        onClick={onClickHarvest}
-                        variant="contained"
-                        color="secondary"
-                        sx={{ borderRadius: 0 }}
-                        disabled={isLoadingWithdraw || pendingReward > 0}
-                      >
-                        HARVEST REWARDS
-                      </Button>
-                    </ButtonGroup>
-                    <Typography variant="body2" textAlign="center" sx={{ marginTop: 2 }}>
-                      Unstaking your AGFI will also automatically harvest all pending rewards.
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }} textAlign="center">
-                      USD value of rewards is based on the current price of AGFI.
-                    </Typography>
+                      {pendingReward && (
+                        <Typography variant="h5" sx={{ fontFamily: 'Roboto' }} textAlign="center">
+                          {fNumber(formatUnits(pendingReward || 0, 9))} AGFI
+                        </Typography>
+                      )}
+                      {pendingReward && priceData && priceData.token && (
+                        <Typography
+                          variant="body2"
+                          sx={{ fontFamily: 'Roboto', color: 'text.secondary' }}
+                          textAlign="center"
+                          gutterBottom
+                        >
+                          ${fNumber(formatUnits(pendingReward || 0, 9) * priceData.token.derivedETH * ethPrice)} USD
+                        </Typography>
+                      )}
+                      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <TextField
+                          label="Amount to Unstake"
+                          value={unstakeAmount}
+                          onChange={handleChangeToUnstake}
+                          variant="standard"
+                          color="primary"
+                          InputProps={{
+                            endAdornment: <InputAdornment position="start">AGFI</InputAdornment>,
+                            inputMode: 'numeric'
+                          }}
+                        />
+                      </Box>
+                      <ButtonGroup variant="outlined" fullWidth size="large">
+                        <Button
+                          onClick={(e) => handleClickToUnstakePercentage(e, 100)}
+                          disabled={isLoadingWithdraw}
+                          sx={{ borderRadius: 0 }}
+                        >
+                          ALL
+                        </Button>
+                        <Button
+                          onClick={onClickUnstake}
+                          variant="contained"
+                          sx={{ borderRadius: 0 }}
+                          disabled={isLoadingWithdraw || actualUnstakeAmount < 1}
+                        >
+                          UNSTAKE
+                        </Button>
+                        <Button
+                          onClick={onClickHarvest}
+                          variant="contained"
+                          color="secondary"
+                          sx={{ borderRadius: 0 }}
+                          disabled={isLoadingWithdraw || pendingReward > 0}
+                        >
+                          HARVEST REWARDS
+                        </Button>
+                      </ButtonGroup>
+                      <Typography variant="body2" textAlign="center" sx={{ marginTop: 2 }}>
+                        Unstaking your AGFI will also automatically harvest all pending rewards.
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }} textAlign="center">
+                        USD value of rewards is based on the current price of AGFI.
+                      </Typography>
+                    </Stack>
                   </TabPanel>
 
                   {withdrawState && withdrawState.status === 'PendingSignature' && (
