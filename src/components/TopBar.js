@@ -51,7 +51,7 @@ const web3Modal = new Web3Modal({
 });
 
 function TopBar(props) {
-  const { colorMode } = props;
+  const { colorMode, title } = props;
   const theme = useTheme();
 
   const { account, activate, chainId, activateBrowserWallet } = useEthers();
@@ -85,8 +85,17 @@ function TopBar(props) {
     <AppBar position="sticky">
       <Toolbar>
         <Box sx={{ width: 40, height: 40, mx: 2 }} src="/logo-new.png" component="img" />
+        <Typography
+          variant="h6"
+          sx={{ mr: 2, textDecoration: 'none', color: 'inherit', fontWeight: 700, display: { xs: 'none', md: 'flex' } }}
+          nowrap
+          component="a"
+          href="/"
+        >
+          AGFI
+        </Typography>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Dashboard
+          {title}
         </Typography>
         {account && (
           <Box sx={{ px: 1, mx: 1, backgroundColor: 'palette.secondary.dark', borderRadius: 2 }}>

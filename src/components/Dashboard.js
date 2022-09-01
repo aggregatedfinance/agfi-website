@@ -272,7 +272,7 @@ function Dashboard(props) {
 
   return (
     <>
-      <TopBar colorMode={colorMode} />
+      <TopBar colorMode={colorMode} title="Dashboard" />
       <Container maxWidth="md">
         <Grid container spacing={1} sx={{ my: 2 }}>
           {!account && (

@@ -16,4 +16,4 @@ export const ETHERSCAN_URL = `https://etherscan.io/token/${AGFI_ADDRESS}`;
 export const UNISWAP_URL = `https://app.uniswap.org/#/swap?outputCurrency=${AGFI_ADDRESS}`;
 export const DAO_URL = 'https://www.tally.xyz/governance/eip155:1:0xD243F9aAfCf32e60b2e9D0FF016cf7f1552d5952';
 export const DAO_MGMT_URL = 'https://github.com/aggregatedfinance/agfi-dao';
-export const TREASURY_URL = 'https://apeboard.finance/dashboard/APE-62Y1CX';
+export const TREASURY_URL = 'https://portfolio.nansen.ai/dashboard/APE-QBCSWX';

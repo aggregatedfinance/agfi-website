@@ -234,14 +234,14 @@ function Home() {
           {[
             {
               title: 'ETH Rewards',
-              body: '3% of buy & sell volume paid directly to in ETH to token holders',
+              body: '4.5% of buy & sell volume paid directly to in ETH to token holders',
               icon: <EmojiEventsIcon sx={{ fontSize: 64 }} />
             },
-            {
-              title: 'Staking Rewards',
-              body: '3% of buy & sell volume distributed to stakers',
-              icon: <MilitaryTechIcon sx={{ fontSize: 64 }} />
-            },
+            // {
+            //   title: 'Staking Rewards',
+            //   body: '3% of buy & sell volume distributed to stakers',
+            //   icon: <MilitaryTechIcon sx={{ fontSize: 64 }} />
+            // },
             {
               title: 'Auto Burn',
               body: '1% of sell volume automatically burned, with 36% supply already burned',
@@ -249,7 +249,7 @@ function Home() {
             },
             {
               title: 'Stronger Treasury',
-              body: '4% of buy & sell volume funds the treasury',
+              body: '4.5% of buy & sell volume funds the treasury',
               icon: <AccountBalanceIcon sx={{ fontSize: 64 }} />
             },
             {

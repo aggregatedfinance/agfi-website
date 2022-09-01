@@ -24,7 +24,7 @@ export default function Footer(props) {
       >
         © {new Date().getFullYear()} Aggregated Finance. All rights reserved.
       </Typography>
-      <Typography component="i" variant="body2" sx={{ color: 'text.secondary', pb: 4 }}>
+      <Typography component="i" variant="body2" sx={{ color: 'text.secondary', pb: 4, fontSize: 8 }}>
         Disclaimer: The Content on this Site is for informational purposes only, you should not construe any such
         information or other material as legal, tax, investment, financial, or other advice. Nothing contained on our
         Site constitutes a solicitation, recommendation, endorsement, or offer by Aggregated Finance or any third party
