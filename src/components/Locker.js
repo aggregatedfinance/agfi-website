@@ -14,6 +14,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material';
+import { ethers } from 'ethers';
 import { useEthers, useToken, useTokenBalance } from '@usedapp/core';
 import TopBar from './TopBar';
 import LockLiquidity from './locker/LockLiquidity';
@@ -52,7 +53,9 @@ function Locker(props) {
   const lpBalance = useTokenBalance(pairAddress || '', account || '');
 
   const onChangeTokenAddress = (e) => {
-    setPairAddress(e.target.value);
+    if (ethers.utils.isAddress(e.target.value)) {
+      setPairAddress(e.target.value);
+    }
   };
 
   const handleChangeTab = (e, newTabValue) => {
