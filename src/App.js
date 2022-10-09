@@ -51,7 +51,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="dashboard" element={<Dashboard colorMode={colorMode} />} />
-            <Route path="launchpad" element={<Launchpad colorMode={colorMode} />} />
+            {/* <Route path="launchpad" element={<Launchpad colorMode={colorMode} />} /> */}
             <Route path="locker" element={<Locker colorMode={colorMode} mode={mode} />} />
           </Routes>
           <Footer colorMode={colorMode} />
