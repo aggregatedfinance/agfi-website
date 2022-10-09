@@ -67,7 +67,7 @@ function Locker(props) {
 
   return (
     <>
-      <TopBar colorMode={colorMode} title="Liquidity Locker" />
+      <TopBar colorMode={colorMode} title="Locker" />
       <Container maxWidth="md">
         <Grid container spacing={2} sx={{ my: 2 }} justifyContent="center">
           <Grid item xs={12} textAlign="center">

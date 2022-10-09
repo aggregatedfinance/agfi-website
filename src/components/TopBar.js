@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Button, Box, IconButton } from '@mui/mater
 import { useTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import HomeIcon from '@mui/icons-material/Home';
 import { useEthers, shortenAddress } from '@usedapp/core';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
@@ -85,14 +86,9 @@ function TopBar(props) {
     <AppBar position="sticky">
       <Toolbar>
         <Box sx={{ width: 40, height: 40, mx: 2 }} src="/logo-new.png" component="img" />
-        <Typography
-          variant="h6"
-          sx={{ mr: 2, textDecoration: 'none', color: 'inherit', fontWeight: 700, display: { xs: 'none', md: 'flex' } }}
-          component="a"
-          href="/"
-        >
-          AGFI
-        </Typography>
+        <IconButton href="/" sx={{ mr: 1 }} color="inherit">
+          <HomeIcon />
+        </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {title}
         </Typography>
