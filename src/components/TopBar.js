@@ -88,7 +88,6 @@ function TopBar(props) {
         <Typography
           variant="h6"
           sx={{ mr: 2, textDecoration: 'none', color: 'inherit', fontWeight: 700, display: { xs: 'none', md: 'flex' } }}
-          nowrap
           component="a"
           href="/"
         >

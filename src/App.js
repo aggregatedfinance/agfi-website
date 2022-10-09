@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { yellow, orange, lightGreen, red, deepOrange } from '@mui/material/colors';
 
-import { Dashboard, Launchpad, Home, Footer } from './components';
+import { Dashboard, Launchpad, Home, Footer, Locker } from './components';
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
@@ -52,6 +52,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="dashboard" element={<Dashboard colorMode={colorMode} />} />
             <Route path="launchpad" element={<Launchpad colorMode={colorMode} />} />
+            <Route path="locker" element={<Locker colorMode={colorMode} mode={mode} />} />
           </Routes>
           <Footer colorMode={colorMode} />
         </>

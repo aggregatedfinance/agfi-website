@@ -2,10 +2,13 @@ import { useContractFunction, useCall } from '@usedapp/core';
 import { Contract } from '@ethersproject/contracts';
 import agfiAbi from './agfiAbi.json';
 import stakingAbi from './stakingAbi.json';
-import { AGFI_ADDRESS, STAKING_ADDRESS } from './config';
+import lockerAbi from './lockerAbi.json';
+import uniswapV2PairAbi from './uniswapV2PairAbi.json';
+import { AGFI_ADDRESS, STAKING_ADDRESS, LOCKER_ADDRESS } from './config';
 
 const agfiContract = new Contract(AGFI_ADDRESS, agfiAbi);
 const stakingContract = new Contract(STAKING_ADDRESS, stakingAbi);
+const lockerContract = new Contract(LOCKER_ADDRESS, lockerAbi);
 
 export function useClaim() {
   const { state, send, events, resetState } = useContractFunction(agfiContract, 'claim', {
@@ -46,6 +49,185 @@ export function useApprove() {
   });
   return { state, send, events, resetState };
 }
+
+export function useLockTokens() {
+  const { state, send, events, resetState } = useContractFunction(lockerContract, 'lockTokens', {
+    transactionName: 'Lock Tokens'
+  });
+  return { state, send, events, resetState };
+}
+
+export function useIncrementLock() {
+  const { state, send, events, resetState } = useContractFunction(lockerContract, 'incrementLock', {
+    transactionName: 'Increment Lock'
+  });
+  return { state, send, events, resetState };
+}
+
+export function useRelock() {
+  const { state, send, events, resetState } = useContractFunction(lockerContract, 'relock', {
+    transactionName: 'Relock'
+  });
+  return { state, send, events, resetState };
+}
+
+export function useSplitLock() {
+  const { state, send, events, resetState } = useContractFunction(lockerContract, 'splitLock', {
+    transactionName: 'Split Lock'
+  });
+  return { state, send, events, resetState };
+}
+
+export function useWithdrawLock() {
+  const { state, send, events, resetState } = useContractFunction(lockerContract, 'withdraw', {
+    transactionName: 'Withdraw'
+  });
+  return { state, send, events, resetState };
+}
+
+export const useGetLockedTokenAtIndex = (index) => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'getLockedTokenAtIndex',
+        args: [index]
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
+};
+
+export const useGetNumLockedTokens = () => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'getNumLockedTokens',
+        args: []
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
+};
+
+export const useGetNumLocksForToken = (lpToken) => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'getNumLocksForToken',
+        args: [lpToken]
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
+};
+
+export const useGetUserLockForTokenAtIndex = (user, lpToken, index) => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'getUserLockForTokenAtIndex',
+        args: [user, lpToken, index]
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
+};
+
+export const useGetUserLockedTokenAtIndex = (user, index) => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'getUserLockedTokenAtIndex',
+        args: [user, index]
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return {
+    lockData: value?.[0],
+    amount: value?.[1],
+    initialAmount: value?.[2],
+    unlockDate: value?.[3],
+    lockID: value?.[4],
+    schemaId: value?.[5],
+    owner: value?.[6]
+  };
+};
+
+export const useGetUserNumLockedTokens = (user) => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'getUserNumLockedTokens',
+        args: [user]
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
+};
+
+export const useGetUserNumLocksForToken = (user) => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'getUserNumLockedTokens',
+        args: [user]
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
+};
+
+export const useLocks = (user) => {
+  const { value, error } =
+    useCall(
+      LOCKER_ADDRESS && {
+        contract: lockerContract,
+        method: 'locks',
+        args: [user]
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return {
+    lockDate: value?.[0],
+    amount: value?.[1],
+    initialAmount: value?.[2],
+    unlockDate: value?.[3],
+    lockID: value?.[4],
+    owner: value?.[5],
+    schemaId: value?.[6]
+  };
+};
 
 export const useGetVotes = (account) => {
   const { value, error } =
@@ -102,6 +284,40 @@ export const useGetAccountInfo = (account) => {
     lastClaimTime: value?.[3],
     totalRewardsWithdrawn: value?.[4]
   };
+};
+
+const getUniswapContract = (contract) => new Contract(contract, uniswapV2PairAbi);
+
+export const useGetToken0 = (contract) => {
+  const { value, error } =
+    useCall(
+      contract && {
+        contract: getUniswapContract(contract),
+        method: 'token0',
+        args: []
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
+};
+
+export const useGetToken1 = (contract) => {
+  const { value, error } =
+    useCall(
+      contract && {
+        contract: getUniswapContract(contract),
+        method: 'token1',
+        args: []
+      }
+    ) ?? {};
+  if (error) {
+    // console.error(error.message);
+    return {};
+  }
+  return value?.[0];
 };
 
 export const useGetPendingReward = (account) => {

@@ -17,3 +17,6 @@ export const UNISWAP_URL = `https://app.uniswap.org/#/swap?outputCurrency=${AGFI
 export const DAO_URL = 'https://www.tally.xyz/governance/eip155:1:0xD243F9aAfCf32e60b2e9D0FF016cf7f1552d5952';
 export const DAO_MGMT_URL = 'https://github.com/aggregatedfinance/agfi-dao';
 export const TREASURY_URL = 'https://portfolio.nansen.ai/dashboard/APE-QBCSWX';
+
+export const LOCKER_ADDRESS = '0x76C927D479a41Fa3dDC9Cc9F1e87719562302360';
+// export const LOCKER_ADDRESS = '0xdA72117B313bF18c86400Fd2430241Dd4Eb4ea30';
