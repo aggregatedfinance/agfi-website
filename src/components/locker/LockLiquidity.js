@@ -120,13 +120,13 @@ function LockLiquidity({ mode, account, pairAddress }) {
     try {
       const newAmount = e.target.value;
       const parsedAmount = parseUnits(newAmount, 18);
-      // if (parsedAmount.gt(lpBalance) || parsedAmount.isNegative()) {
-      //   setActualAmountToLock(lpBalance);
-      //   setAmountToLock(formatUnits(lpBalance || 0, 18));
-      // } else {
-      setActualAmountToLock(parsedAmount);
-      setAmountToLock(newAmount);
-      // }
+      if (parsedAmount.gt(lpBalance) || parsedAmount.isNegative()) {
+        setActualAmountToLock(lpBalance);
+        setAmountToLock(formatUnits(lpBalance || 0, 18));
+      } else {
+        setActualAmountToLock(parsedAmount);
+        setAmountToLock(newAmount);
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -158,6 +158,7 @@ function LockLiquidity({ mode, account, pairAddress }) {
       <ButtonGroup
         fullWidth
         size="small"
+        disabled={isLoading}
         variant={mode === 'dark' ? 'outlined' : 'contained'}
         color={mode === 'dark' ? 'primary' : 'secondary'}
       >
@@ -181,15 +182,12 @@ function LockLiquidity({ mode, account, pairAddress }) {
       <ButtonGroup
         fullWidth
         size="small"
+        disabled={isLoading}
         variant={mode === 'dark' ? 'outlined' : 'contained'}
         color={mode === 'dark' ? 'primary' : 'secondary'}
       >
-        <Button disabled={isLoading} onClick={onClick6Months}>
-          6 Months
-        </Button>
-        <Button disabled={isLoading} onClick={onClick12Months}>
-          12 Months
-        </Button>
+        <Button onClick={onClick6Months}>6 Months</Button>
+        <Button onClick={onClick12Months}>12 Months</Button>
       </ButtonGroup>
       <Divider>
         <i>Extras</i>
@@ -218,7 +216,7 @@ function LockLiquidity({ mode, account, pairAddress }) {
           onClick={onClickLock}
           color="success"
           startIcon={<LockIcon />}
-          disabled={lockingAllowance < actualAmountToLock || amountToLock < 1 || isLoading}
+          disabled={lockingAllowance < actualAmountToLock || actualAmountToLock < 1 || isLoading}
         >
           Lock
         </Button>
