@@ -50,6 +50,13 @@ export function useApprove() {
   return { state, send, events, resetState };
 }
 
+export function useApproveLocker() {
+  const { state, send, events, resetState } = useContractFunction(lockerContract, 'approve', {
+    transactionName: 'Approve'
+  });
+  return { state, send, events, resetState };
+}
+
 export function useLockTokens() {
   const { state, send, events, resetState } = useContractFunction(lockerContract, 'lockTokens', {
     transactionName: 'Lock Tokens'

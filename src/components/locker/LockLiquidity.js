@@ -19,7 +19,7 @@ import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useTokenAllowance } from '@usedapp/core';
 import { formatUnits, parseUnits } from '@ethersproject/units';
-import { useApprove, useLockTokens } from '../../hooks';
+import { useApproveLocker, useLockTokens } from '../../hooks';
 import LoadingState from '../LoadingState';
 import { LOCKER_ADDRESS } from '../../config';
 
@@ -56,7 +56,7 @@ function LockLiquidity(props) {
   const [actualAmountToLock, setActualAmountToLock] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const lockingAllowance = useTokenAllowance(pairAddress, account, LOCKER_ADDRESS);
-  const { state: approveState, send: approveSend, resetState: approveResetState } = useApprove();
+  const { state: approveState, send: approveSend, resetState: approveResetState } = useApproveLocker();
   const { state: lockState, send: lockSend, resetState: lockResetState } = useLockTokens();
 
   useEffect(() => {
