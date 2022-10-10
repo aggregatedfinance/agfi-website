@@ -65,6 +65,9 @@ function LockLiquidity({ mode, account, pairAddress }) {
   const token1Info = useToken(token1 || '');
   const lpBalance = useTokenBalance(pairAddress || '', account || '');
 
+  console.log(lockingAllowance);
+  console.log(actualAmountToLock);
+
   useEffect(() => {
     if (approveState) {
       logLoading(approveState, 'approve');
@@ -204,22 +207,26 @@ function LockLiquidity({ mode, account, pairAddress }) {
         </Alert>
       )}
       <ButtonGroup size="large" orientation="horizontal" fullWidth variant="contained">
-        <Button
-          onClick={onClickApprove}
-          disabled={lockingAllowance >= actualAmountToLock || isLoading}
-          color={mode === 'dark' ? 'primary' : 'secondary'}
-          startIcon={<ApprovalIcon />}
-        >
-          Approve
-        </Button>
-        <Button
-          onClick={onClickLock}
-          color="success"
-          startIcon={<LockIcon />}
-          disabled={lockingAllowance < actualAmountToLock || actualAmountToLock < 1 || isLoading}
-        >
-          Lock
-        </Button>
+        {BigNumber.isBigNumber(lockingAllowance) && (
+          <Button
+            onClick={onClickApprove}
+            disabled={lockingAllowance.gte(actualAmountToLock) || isLoading}
+            color={mode === 'dark' ? 'primary' : 'secondary'}
+            startIcon={<ApprovalIcon />}
+          >
+            Approve
+          </Button>
+        )}
+        {BigNumber.isBigNumber(lockingAllowance) && (
+          <Button
+            onClick={onClickLock}
+            color="success"
+            startIcon={<LockIcon />}
+            disabled={lockingAllowance.lt(actualAmountToLock) || actualAmountToLock < 1 || isLoading}
+          >
+            Lock
+          </Button>
+        )}
       </ButtonGroup>
       <LoadingState state={approveState} />
       <LoadingState state={lockState} />
