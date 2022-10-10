@@ -57,7 +57,7 @@ function LockLiquidity({ mode, account, pairAddress }) {
   const [actualAmountToLock, setActualAmountToLock] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const lockingAllowance = useTokenAllowance(pairAddress, account, LOCKER_ADDRESS);
-  const { state: approveState, send: approveSend, resetState: approveResetState } = useApproveLocker();
+  const { state: approveState, send: approveSend, resetState: approveResetState } = useApproveLocker(pairAddress);
   const { state: lockState, send: lockSend, resetState: lockResetState } = useLockTokens();
   const token0 = useGetToken0(pairAddress || '');
   const token1 = useGetToken1(pairAddress || '');
@@ -120,13 +120,13 @@ function LockLiquidity({ mode, account, pairAddress }) {
     try {
       const newAmount = e.target.value;
       const parsedAmount = parseUnits(newAmount, 18);
-      if (parsedAmount.gt(lpBalance) || parsedAmount.isNegative()) {
-        setActualAmountToLock(lpBalance);
-        setAmountToLock(formatUnits(lpBalance || 0, 18));
-      } else {
-        setActualAmountToLock(parsedAmount);
-        setAmountToLock(newAmount);
-      }
+      // if (parsedAmount.gt(lpBalance) || parsedAmount.isNegative()) {
+      //   setActualAmountToLock(lpBalance);
+      //   setAmountToLock(formatUnits(lpBalance || 0, 18));
+      // } else {
+      setActualAmountToLock(parsedAmount);
+      setAmountToLock(newAmount);
+      // }
     } catch (error) {
       console.error(error.message);
     }

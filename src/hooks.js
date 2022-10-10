@@ -50,8 +50,9 @@ export function useApprove() {
   return { state, send, events, resetState };
 }
 
-export function useApproveLocker() {
-  const { state, send, events, resetState } = useContractFunction(lockerContract, 'approve', {
+export function useApproveLocker(token) {
+  const tokenContract = new Contract(token, uniswapV2PairAbi);
+  const { state, send, events, resetState } = useContractFunction(tokenContract, 'approve', {
     transactionName: 'Approve'
   });
   return { state, send, events, resetState };
