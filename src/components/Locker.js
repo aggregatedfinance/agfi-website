@@ -79,7 +79,16 @@ function Locker(props) {
             </Typography>
             <Typography variant="body1" component="p">
               Lock liquidity tokens to protect them, provide assurance, and optionally get extra regulatory protection
-              and access control using Signata. Fees collected are distributed to the AGFI rewards contract.
+              and access control using{' '}
+              <Link
+                href="https://signata.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                color={theme.palette.success.main}
+              >
+                Signata
+              </Link>
+              . Fees collected are distributed to the AGFI rewards contract.
             </Typography>
           </Grid>
         </Grid>
@@ -167,14 +176,11 @@ function Locker(props) {
                 </TabPanel>
               </Grid>
               <Grid item xs={12} textAlign="center">
-                <Link
-                  href="https://signata.net/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  color={theme.palette.success.main}
-                >
-                  <i>Secured by Signata</i>
-                </Link>
+                {mode === 'dark' ? (
+                  <img src="secured-by-dark.png" style={{ width: 200 }} alt="Secured by Signata" />
+                ) : (
+                  <img src="secured-by-light.png" style={{ width: 200 }} alt="Secured by Signata" />
+                )}
               </Grid>
             </Grid>
           </CardContent>

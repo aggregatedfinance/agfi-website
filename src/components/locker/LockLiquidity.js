@@ -56,9 +56,9 @@ function LockLiquidity(props) {
   const [actualAmountToLock, setActualAmountToLock] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const lockingAllowance = useTokenAllowance(pairAddress, account, LOCKER_ADDRESS);
-
   const { state: approveState, send: approveSend, resetState: approveResetState } = useApprove();
   const { state: lockState, send: lockSend, resetState: lockResetState } = useLockTokens();
+
   useEffect(() => {
     if (approveState) {
       logLoading(approveState, 'approve');
@@ -87,7 +87,13 @@ function LockLiquidity(props) {
   const onClickLock = (e) => {
     e.preventDefault();
     resetStates();
-    lockSend(pairAddress, actualAmountToLock, unlockDate.unix(), account, enforceSignata ? 2 : 0);
+    lockSend(
+      pairAddress,
+      BigNumber.from(actualAmountToLock),
+      unlockDate.unix(),
+      account,
+      BigNumber.from(enforceSignata ? '2' : '0')
+    );
   };
 
   const onClick6Months = (e) => {
