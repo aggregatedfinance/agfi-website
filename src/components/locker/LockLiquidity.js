@@ -87,7 +87,7 @@ function LockLiquidity({ mode, account, pairAddress }) {
   const onClickApprove = (e) => {
     e.preventDefault();
     resetStates();
-    approveSend(LOCKER_ADDRESS, BigNumber.from(actualAmountToLock));
+    approveSend(pairAddress, BigNumber.from(actualAmountToLock));
   };
 
   const onClickLock = (e) => {
