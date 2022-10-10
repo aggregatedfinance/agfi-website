@@ -65,9 +65,6 @@ function LockLiquidity({ mode, account, pairAddress }) {
   const token1Info = useToken(token1 || '');
   const lpBalance = useTokenBalance(pairAddress || '', account || '');
 
-  console.log(lockingAllowance);
-  console.log(actualAmountToLock);
-
   useEffect(() => {
     if (approveState) {
       logLoading(approveState, 'approve');
@@ -90,7 +87,7 @@ function LockLiquidity({ mode, account, pairAddress }) {
   const onClickApprove = (e) => {
     e.preventDefault();
     resetStates();
-    approveSend(pairAddress, BigNumber.from(actualAmountToLock));
+    approveSend(LOCKER_ADDRESS, BigNumber.from(actualAmountToLock));
   };
 
   const onClickLock = (e) => {
