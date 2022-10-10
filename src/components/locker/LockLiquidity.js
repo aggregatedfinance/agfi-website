@@ -8,20 +8,22 @@ import {
   FormControlLabel,
   FormGroup,
   Stack,
-  TextField
+  TextField,
+  Typography
 } from '@mui/material';
-import { BigNumber } from 'ethers';
-import ApprovalIcon from '@mui/icons-material/Approval';
-import LockIcon from '@mui/icons-material/Lock';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { useTokenAllowance } from '@usedapp/core';
+import { BigNumber } from 'ethers';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { formatUnits, parseUnits } from '@ethersproject/units';
-import { useApproveLocker, useLockTokens } from '../../hooks';
-import LoadingState from '../LoadingState';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { useTokenAllowance, useToken, useTokenBalance } from '@usedapp/core';
+import ApprovalIcon from '@mui/icons-material/Approval';
+import dayjs from 'dayjs';
+import LockIcon from '@mui/icons-material/Lock';
+import { fNumberWithDecimals } from '../../formatNumber';
 import { LOCKER_ADDRESS } from '../../config';
+import { useApproveLocker, useLockTokens, useGetToken0, useGetToken1 } from '../../hooks';
+import LoadingState from '../LoadingState';
 
 function logLoading(state, name) {
   if (state && window.location.hostname === 'localhost') {
@@ -48,8 +50,7 @@ function shouldBeLoading(state) {
   }
 }
 
-function LockLiquidity(props) {
-  const { mode, account, pairAddress, lpBalance } = props;
+function LockLiquidity({ mode, account, pairAddress }) {
   const [unlockDate, setUnlockDate] = useState(dayjs());
   const [enforceSignata, setEnforceSignata] = useState(true);
   const [amountToLock, setAmountToLock] = useState(0);
@@ -58,6 +59,11 @@ function LockLiquidity(props) {
   const lockingAllowance = useTokenAllowance(pairAddress, account, LOCKER_ADDRESS);
   const { state: approveState, send: approveSend, resetState: approveResetState } = useApproveLocker();
   const { state: lockState, send: lockSend, resetState: lockResetState } = useLockTokens();
+  const token0 = useGetToken0(pairAddress || '');
+  const token1 = useGetToken1(pairAddress || '');
+  const token0Info = useToken(token0 || '');
+  const token1Info = useToken(token1 || '');
+  const lpBalance = useTokenBalance(pairAddress || '', account || '');
 
   useEffect(() => {
     if (approveState) {
@@ -135,6 +141,16 @@ function LockLiquidity(props) {
 
   return (
     <Stack spacing={2} sx={{ pt: 2 }}>
+      {lpBalance && token0Info && token1Info && (
+        <Typography variant="body2" color="text.secondary" textAlign="center">
+          Your Balance
+        </Typography>
+      )}
+      {lpBalance && token0Info && token1Info && (
+        <Typography variant="h5" sx={{ fontWeight: 700 }} textAlign="center">
+          {fNumberWithDecimals(formatUnits(lpBalance, 18))} {token0Info.symbol}/{token1Info.symbol}
+        </Typography>
+      )}
       <Divider>
         <i>Amount to Lock</i>
       </Divider>

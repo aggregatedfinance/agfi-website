@@ -15,11 +15,10 @@ import {
   useTheme
 } from '@mui/material';
 import { ethers } from 'ethers';
-import { useEthers, useToken, useTokenBalance } from '@usedapp/core';
+import { useEthers, useToken } from '@usedapp/core';
 import TopBar from './TopBar';
 import LockLiquidity from './locker/LockLiquidity';
 import WithdrawLiquidity from './locker/WithdrawLiquidity';
-import { useGetToken0, useGetToken1 } from '../hooks';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,11 +45,6 @@ function Locker(props) {
   const [validPairAddress, setValidPairAddress] = useState(false);
   const [tabValue, setTabValue] = useState(0);
   const tokenInfo = useToken(pairAddress || '');
-  const token0 = useGetToken0(pairAddress || '');
-  const token1 = useGetToken1(pairAddress || '');
-  const token0Info = useToken(token0 || '');
-  const token1Info = useToken(token1 || '');
-  const lpBalance = useTokenBalance(pairAddress || '', account || '');
 
   const onChangeTokenAddress = (e) => {
     if (ethers.utils.isAddress(e.target.value)) {
@@ -128,19 +122,9 @@ function Locker(props) {
                       value={pairAddress}
                       onChange={onChangeTokenAddress}
                     />
-                    {lpBalance && token0Info && token1Info && (
-                      <Typography variant="body2" color="text.secondary" textAlign="center">
-                        Your Balance
-                      </Typography>
-                    )}
-                    {lpBalance && token0Info && token1Info && (
-                      <Typography variant="h5" sx={{ fontWeight: 700 }} textAlign="center">
-                        {lpBalance.toString()} {token0Info.symbol}/{token1Info.symbol}
-                      </Typography>
-                    )}
                   </Stack>
                   {validPairAddress && tokenInfo && (
-                    <LockLiquidity account={account} mode={mode} tokenInfo={tokenInfo} lpBalance={lpBalance} />
+                    <LockLiquidity account={account} mode={mode} tokenInfo={tokenInfo} pairAddress={pairAddress} />
                   )}
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
@@ -159,19 +143,9 @@ function Locker(props) {
                       value={pairAddress}
                       onChange={onChangeTokenAddress}
                     />
-                    {lpBalance && token0Info && token1Info && (
-                      <Typography variant="body2" color="text.secondary" textAlign="center">
-                        Your Balance
-                      </Typography>
-                    )}
-                    {lpBalance && token0Info && token1Info && (
-                      <Typography variant="h5" textAlign="center">
-                        {lpBalance.toString()} {token0Info.symbol}/{token1Info.symbol}
-                      </Typography>
-                    )}
                   </Stack>
                   {validPairAddress && tokenInfo && (
-                    <WithdrawLiquidity account={account} mode={mode} tokenInfo={tokenInfo} />
+                    <WithdrawLiquidity account={account} mode={mode} tokenInfo={tokenInfo} pairAddress={pairAddress} />
                   )}
                 </TabPanel>
               </Grid>

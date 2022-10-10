@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Divider, Stack, TextField, Typography } from '@mui/material';
-import { BigNumber } from 'ethers';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import dayjs, { Dayjs } from 'dayjs';
-import { useEthers } from '@usedapp/core';
-import { useWithdrawLock } from '../../hooks';
+import { formatUnits } from '@ethersproject/units';
+import dayjs from 'dayjs';
+import { useToken, useTokenBalance } from '@usedapp/core';
+import { useWithdrawLock, useGetToken0, useGetToken1 } from '../../hooks';
 import LoadingState from '../LoadingState';
-import { LOCKER_ADDRESS } from '../../config';
+import { fNumberWithDecimals } from '../../formatNumber';
 
 function logLoading(state, name) {
   if (state && window.location.hostname === 'localhost') {
@@ -33,14 +33,18 @@ function shouldBeLoading(state) {
   }
 }
 
-function WithdrawLiquidity(props) {
-  const { mode, account, pairAddress } = props;
+function WithdrawLiquidity({ mode, account, pairAddress }) {
   const [unlockDate, setUnlockDate] = useState(dayjs());
   const [amountToLock, setAmountToLock] = useState(0);
   const [actualAmountToUnlock, setActualAmountToUnlock] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [index, setIndex] = useState(0);
   const [lockId, setLockId] = useState(0);
+  const token0 = useGetToken0(pairAddress || '');
+  const token1 = useGetToken1(pairAddress || '');
+  const token0Info = useToken(token0 || '');
+  const token1Info = useToken(token1 || '');
+  const lpBalance = useTokenBalance(pairAddress || '', account || '');
 
   const { state: withdrawState, send: withdrawSend, resetState: withdrawResetState } = useWithdrawLock();
 
@@ -77,6 +81,16 @@ function WithdrawLiquidity(props) {
 
   return (
     <Stack spacing={2} sx={{ pt: 2 }}>
+      {lpBalance && token0Info && token1Info && (
+        <Typography variant="body2" color="text.secondary" textAlign="center">
+          Your Balance
+        </Typography>
+      )}
+      {lpBalance && token0Info && token1Info && (
+        <Typography variant="h5" sx={{ fontWeight: 700 }} textAlign="center">
+          {fNumberWithDecimals(formatUnits(lpBalance, 18))} {token0Info.symbol}/{token1Info.symbol}
+        </Typography>
+      )}
       <Divider>
         <i>Amount to Withdraw</i>
       </Divider>
