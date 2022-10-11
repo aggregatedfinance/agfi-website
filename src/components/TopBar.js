@@ -74,7 +74,7 @@ function TopBar(props) {
   }, [activateBrowserWallet]);
 
   useEffect(() => {
-    if (chainId && chainId !== 1) {
+    if (chainId && chainId !== 1 && chainId !== 5) {
       window.ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0x1' }]

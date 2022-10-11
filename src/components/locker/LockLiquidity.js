@@ -12,7 +12,7 @@ import {
   Typography
 } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { BigNumber } from 'ethers';
+import { BigNumber, utils } from 'ethers';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { formatUnits, parseUnits } from '@ethersproject/units';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -98,7 +98,8 @@ function LockLiquidity({ mode, account, pairAddress }) {
       BigNumber.from(actualAmountToLock),
       unlockDate.unix(),
       account,
-      BigNumber.from(enforceSignata ? '2' : '0')
+      BigNumber.from(enforceSignata ? '2' : '0'),
+      { value: utils.parseEther('0.1') }
     );
   };
 

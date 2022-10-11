@@ -18,5 +18,4 @@ export const DAO_URL = 'https://www.tally.xyz/governance/eip155:1:0xD243F9aAfCf3
 export const DAO_MGMT_URL = 'https://github.com/aggregatedfinance/agfi-dao';
 export const TREASURY_URL = 'https://portfolio.nansen.ai/dashboard/APE-QBCSWX';
 
-export const LOCKER_ADDRESS = '0xf69BD84911E8C0b3E745B9eC5bCd77651619E85c';
-// export const LOCKER_ADDRESS = '0xdA72117B313bF18c86400Fd2430241Dd4Eb4ea30';
+export const LOCKER_ADDRESS = '0x76C927D479a41Fa3dDC9Cc9F1e87719562302360';
