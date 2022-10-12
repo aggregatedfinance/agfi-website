@@ -53,7 +53,8 @@ const supplyHistory = [
   { timestamp: 1651844460000, supply: 731.66 },
   { timestamp: 1651932697000, supply: 634.15 },
   { timestamp: 1657972403000, supply: 633.33 },
-  { timestamp: 1663291646000, supply: 632.84 }
+  { timestamp: 1663291646000, supply: 632.84 },
+  { timestamp: 1665547483000, supply: 632.75 }
 ];
 
 const isStateLoading = (txnState) => {
