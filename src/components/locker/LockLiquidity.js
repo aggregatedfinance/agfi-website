@@ -204,7 +204,8 @@ function LockLiquidity({ mode, account, pairAddress }) {
       </FormGroup>
       {enforceSignata && (
         <Alert severity="info">
-          Signata KYC enforced locks require lockers and withdrawers to hold a KYC NFT issued by Signata.
+          Signata KYC enforced locks require lockers and withdrawers to hold a KYC NFT issued by Signata. AGFI never
+          sees the any KYC data, only the proof issued from Signata.
         </Alert>
       )}
       <ButtonGroup size="large" orientation="horizontal" fullWidth variant="contained">
