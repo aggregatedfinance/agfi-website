@@ -9,7 +9,8 @@ import {
   FormGroup,
   Stack,
   TextField,
-  Typography
+  Typography,
+  Box
 } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { BigNumber, utils } from 'ethers';
@@ -142,16 +143,18 @@ function LockLiquidity({ mode, account, pairAddress }) {
 
   return (
     <Stack spacing={2} sx={{ pt: 2 }}>
-      {lpBalance && token0Info && token1Info && (
-        <Typography variant="body2" color="text.secondary" textAlign="center">
-          Your Balance
-        </Typography>
-      )}
-      {lpBalance && token0Info && token1Info && (
-        <Typography variant="h5" sx={{ fontWeight: 700 }} textAlign="center">
-          {fNumberWithDecimals(formatUnits(lpBalance, 18))} {token0Info.symbol}/{token1Info.symbol}
-        </Typography>
-      )}
+      <Box>
+        {lpBalance && token0Info && token1Info && (
+          <Typography variant="body2" color="text.secondary" textAlign="center">
+            Your Balance
+          </Typography>
+        )}
+        {lpBalance && token0Info && token1Info && (
+          <Typography variant="h5" sx={{ fontWeight: 700 }} textAlign="center">
+            {fNumberWithDecimals(formatUnits(lpBalance, 18))} {token0Info.symbol}/{token1Info.symbol}
+          </Typography>
+        )}
+      </Box>
       <Divider>
         <i>Amount to Lock</i>
       </Divider>

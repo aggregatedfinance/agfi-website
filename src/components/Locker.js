@@ -19,6 +19,7 @@ import { useEthers, useToken } from '@usedapp/core';
 import TopBar from './TopBar';
 import LockLiquidity from './locker/LockLiquidity';
 import WithdrawLiquidity from './locker/WithdrawLiquidity';
+import Locks from './locker/Locks';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -91,7 +92,7 @@ function Locker(props) {
         <Card>
           <CardContent>
             <Grid container spacing={2} justifyContent="center">
-              <Grid item xs={12} textAlign="center">
+              {/* <Grid item xs={12} textAlign="center">
                 <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                   <Tabs
                     value={tabValue}
@@ -104,30 +105,33 @@ function Locker(props) {
                     <Tab label="Withdraw Liquidity" />
                   </Tabs>
                 </Box>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
-                <TabPanel value={tabValue} index={0}>
-                  <Stack spacing={2}>
-                    <Typography variant="h4" sx={{ fontWeight: 700 }} textAlign="center">
-                      Lock Liquidity
-                    </Typography>
-                    <Divider>
-                      <i>Liquidity Pair Address</i>
-                    </Divider>
-                    <TextField
-                      required
-                      label="Uniswap V2 Pair Address"
-                      fullWidth
-                      color={mode === 'dark' ? 'primary' : 'secondary'}
-                      value={pairAddress}
-                      onChange={onChangeTokenAddress}
-                    />
-                  </Stack>
-                  {validPairAddress && tokenInfo && (
-                    <LockLiquidity account={account} mode={mode} tokenInfo={tokenInfo} pairAddress={pairAddress} />
-                  )}
-                </TabPanel>
-                <TabPanel value={tabValue} index={1}>
+                {/* <TabPanel value={tabValue} index={0}> */}
+                <Stack spacing={2}>
+                  <Typography variant="h4" sx={{ fontWeight: 700 }} textAlign="center">
+                    Lock Liquidity
+                  </Typography>
+                  <Divider>
+                    <i>Liquidity Pair Address</i>
+                  </Divider>
+                  <TextField
+                    required
+                    label="Uniswap V2 Pair Address"
+                    fullWidth
+                    color={mode === 'dark' ? 'primary' : 'secondary'}
+                    value={pairAddress}
+                    onChange={onChangeTokenAddress}
+                  />
+                </Stack>
+                {validPairAddress && tokenInfo && (
+                  <LockLiquidity account={account} mode={mode} tokenInfo={tokenInfo} pairAddress={pairAddress} />
+                )}
+                {validPairAddress && tokenInfo && (
+                  <Locks account={account} mode={mode} tokenInfo={tokenInfo} pairAddress={pairAddress} />
+                )}
+                {/* </TabPanel> */}
+                {/* <TabPanel value={tabValue} index={1}>
                   <Stack spacing={2}>
                     <Typography variant="h4" sx={{ fontWeight: 700 }} textAlign="center">
                       Withdraw Liquidity
@@ -147,7 +151,7 @@ function Locker(props) {
                   {validPairAddress && tokenInfo && (
                     <WithdrawLiquidity account={account} mode={mode} tokenInfo={tokenInfo} pairAddress={pairAddress} />
                   )}
-                </TabPanel>
+                </TabPanel> */}
               </Grid>
               <Grid item xs={12} textAlign="center">
                 {mode === 'dark' ? (

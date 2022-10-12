@@ -197,13 +197,13 @@ export const useGetUserNumLockedTokens = (user) => {
   return value?.[0];
 };
 
-export const useGetUserNumLocksForToken = (user) => {
+export const useGetUserNumLocksForToken = (user, token) => {
   const { value, error } =
     useCall(
       LOCKER_ADDRESS && {
         contract: lockerContract,
         method: 'getUserNumLockedTokens',
-        args: [user]
+        args: [user, token]
       }
     ) ?? {};
   if (error) {
@@ -213,13 +213,13 @@ export const useGetUserNumLocksForToken = (user) => {
   return value?.[0];
 };
 
-export const useLocks = (user) => {
+export const useLocks = (pairAddress, idx) => {
   const { value, error } =
     useCall(
       LOCKER_ADDRESS && {
         contract: lockerContract,
         method: 'locks',
-        args: [user]
+        args: [pairAddress, idx]
       }
     ) ?? {};
   if (error) {
