@@ -26,14 +26,13 @@ import GhostContentAPI from '@tryghost/content-api';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SchoolIcon from '@mui/icons-material/School';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import DnsIcon from '@mui/icons-material/Dns';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 
-import { DEXT_URL, DOCS_URL, ETHERSCAN_URL, TWITTER_URL, TG_URL, UNISWAP_URL } from '../config';
+import { DEXT_URL, DOCS_URL, ETHERSCAN_URL, TWITTER_URL, TG_URL } from '../config';
 
 const api = new GhostContentAPI({
   url: 'https://aggregated-finance.ghost.io',
@@ -61,14 +60,14 @@ function FeaturesTable() {
           {[
             { name: 'Reflections', v1Ticked: true, v2Ticked: false },
             { name: 'ETH Rewards', v1Ticked: false, v2Ticked: true },
-            { name: 'Multi Reward Staking', v1Ticked: false, v2Ticked: true },
+            // { name: 'Multi Reward Staking', v1Ticked: false, v2Ticked: true },
             { name: 'Auto Burn', v1Ticked: false, v2Ticked: true },
             { name: 'DAO Community Ownership', v1Ticked: false, v2Ticked: true },
             { name: 'Customizable Tax Channels', v1Ticked: false, v2Ticked: true },
             { name: 'Flexible Token Contract', v1Ticked: false, v2Ticked: true },
             { name: 'Automatically Deflationary', v1Ticked: false, v2Ticked: true },
-            { name: 'Tax Free Compounding Rewards', v1Ticked: false, v2Ticked: true },
-            { name: 'Alpha Association', v1Ticked: false, v2Ticked: true }
+            { name: 'Tax Free Compounding Rewards', v1Ticked: false, v2Ticked: true }
+            // { name: 'Alpha Association', v1Ticked: false, v2Ticked: true }
           ].map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row" align="right">
@@ -108,7 +107,6 @@ function Home() {
 
   return (
     <div>
-      {/* <Container> */}
       <div
         style={{
           background: theme.palette.mode === 'dark' ? 'url(hero-bg-dark.jpg)' : 'url(hero-bg-white.jpg)',
@@ -167,6 +165,9 @@ function Home() {
                   >
                     DASHBOARD
                   </Button>
+                  <Button target="_blank" href="/#/locker" sx={{ fontFamily: 'Montserrat' }}>
+                    LOCKER
+                  </Button>
                   <Button target="_blank" href={DOCS_URL} sx={{ fontFamily: 'Montserrat' }}>
                     LEARN
                   </Button>
@@ -182,9 +183,6 @@ function Home() {
                   <Button target="_blank" href={DEXT_URL} sx={{ fontFamily: 'Montserrat' }}>
                     CHART
                   </Button>
-                  <Button target="_blank" href={UNISWAP_URL} sx={{ fontFamily: 'Montserrat' }}>
-                    UNISWAP
-                  </Button>
                 </ButtonGroup>
               </Grid>
               <Grid item xs={12} md={8} textAlign="center">
@@ -197,7 +195,6 @@ function Home() {
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
           <Grid item xs={12} md={8}>
-            {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
             <Typography variant="h2" sx={{ fontFamily: 'Montserrat' }}>
               FINANCE, AGGREGATED.
             </Typography>
@@ -211,7 +208,6 @@ function Home() {
             </Button>
           </Grid>
           <Grid item xs={12} md={4}>
-            {/* img max width */}
             <img src="agfiv2.png" alt="Aggregated Finance" width="100%" />
           </Grid>
         </Grid>
@@ -228,13 +224,10 @@ function Home() {
               TOKENOMICS
             </Typography>
           </Grid>
-          {/* <Grid item xs={12} paddingBottom={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <img src="token1.png" alt="Tokenomics" width="100%" />
-        </Grid> */}
           {[
             {
               title: 'ETH Rewards',
-              body: '4.5% of buy & sell volume paid directly to in ETH to token holders',
+              body: '3% of sell volume paid directly in ETH to token holders',
               icon: <EmojiEventsIcon sx={{ fontSize: 64 }} />
             },
             // {
@@ -249,12 +242,12 @@ function Home() {
             },
             {
               title: 'Stronger Treasury',
-              body: '4.5% of buy & sell volume funds the treasury',
+              body: '4% of buy & 6% of sell volume funds the treasury',
               icon: <AccountBalanceIcon sx={{ fontSize: 64 }} />
             },
             {
               title: 'Operations',
-              body: '2% of buy & sell volume funds operational costs',
+              body: '1% of buy & 3% of sell volume funds operational costs',
               icon: <DnsIcon sx={{ fontSize: 64 }} />
             },
             {
@@ -308,7 +301,6 @@ function Home() {
             </Grid>
           )}
           <Grid item xs={12} md={4}>
-            {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
             <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Montserrat' }}>
               UPGRADE TO THE NEXT LEVEL
             </Typography>
@@ -326,7 +318,6 @@ function Home() {
 
         <Grid container spacing={4} alignItems="center" sx={{ my: 15 }}>
           <Grid item xs={12} md={4}>
-            {/* <Typography variant="h2" sx={{ mb: 3, letterSpacing: '0.5rem', lineHeight: 1.5 }}> */}
             <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Montserrat' }}>
               COMMUNITY POWERED
             </Typography>
@@ -343,7 +334,6 @@ function Home() {
 
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {/* <Typography variant="h2" sx={{ textAlign: 'center', letterSpacing: '0.5rem', paddingBottom: 5 }}> */}
             <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', fontFamily: 'Montserrat' }}>
               LATEST NEWS
             </Typography>
@@ -376,7 +366,6 @@ function Home() {
           ))}
         </Grid>
       </Container>
-      {/* </Container> */}
     </div>
   );
 }

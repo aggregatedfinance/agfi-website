@@ -583,7 +583,8 @@ function Dashboard(props) {
                       <ButtonGroup variant="outlined" fullWidth size="large">
                         <Button
                           onClick={(e) => handleClickToStakePercentage(e, 100)}
-                          disabled={isLoadingDeposit || isLoadingApprove}
+                          disabled
+                          // disabled={isLoadingDeposit || isLoadingApprove}
                           sx={{ borderRadius: 0 }}
                         >
                           ALL
@@ -591,7 +592,8 @@ function Dashboard(props) {
                         <Button
                           onClick={onClickApprove}
                           variant="contained"
-                          disabled={stakingAllowance >= actualStakeAmount || isLoadingDeposit || isLoadingApprove}
+                          disabled
+                          // disabled={stakingAllowance >= actualStakeAmount || isLoadingDeposit || isLoadingApprove}
                           startIcon={<DoneIcon />}
                           sx={{ borderRadius: 0 }}
                         >
@@ -600,22 +602,23 @@ function Dashboard(props) {
                         <Button
                           onClick={onClickStake}
                           variant="contained"
-                          disabled={
-                            stakingAllowance < actualStakeAmount ||
-                            stakeAmount < 1 ||
-                            isLoadingDeposit ||
-                            isLoadingApprove
-                          }
+                          disabled
+                          // disabled={
+                          //   stakingAllowance < actualStakeAmount ||
+                          //   stakeAmount < 1 ||
+                          //   isLoadingDeposit ||
+                          //   isLoadingApprove
+                          // }
                           startIcon={<AddBoxIcon />}
                           sx={{ borderRadius: 0 }}
                         >
                           STAKE
                         </Button>
                       </ButtonGroup>
-                      <Typography variant="body2" textAlign="center" sx={{ marginTop: 2 }}>
+                      {/* <Typography variant="body2" textAlign="center" sx={{ marginTop: 2 }}>
                         If you stake AGFI, you cannot vote in the DAO. Only unstaked and delegated tokens can vote on
                         proposals.
-                      </Typography>
+                      </Typography> */}
                     </Stack>
                   </TabPanel>
 

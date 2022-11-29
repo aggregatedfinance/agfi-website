@@ -94,6 +94,13 @@ function LockLiquidity({ mode, account, pairAddress }) {
   const onClickLock = (e) => {
     e.preventDefault();
     resetStates();
+    console.log({
+      pairAddress,
+      actualAmountToLock: BigNumber.from(actualAmountToLock),
+      unlockDate: unlockDate.unix(),
+      account,
+      enforceSignata: BigNumber.from(enforceSignata ? '2' : '0')
+    });
     lockSend(
       pairAddress,
       BigNumber.from(actualAmountToLock),
