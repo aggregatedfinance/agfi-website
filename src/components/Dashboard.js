@@ -23,7 +23,18 @@ import moment from 'moment';
 import { formatUnits, parseUnits } from '@ethersproject/units';
 import { useCoingeckoPrice } from '@usedapp/coingecko';
 import { useEthers, useTokenBalance, useTokenAllowance } from '@usedapp/core';
-import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area, ResponsiveContainer, Legend } from 'recharts';
+import {
+  BarChart,
+  AreaChart,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Area,
+  Bar,
+  ResponsiveContainer,
+  Legend
+} from 'recharts';
 
 import TransactionStatus from './dashboard/TransactionStatus';
 import ContractData from './dashboard/ContractData';
@@ -41,7 +52,8 @@ import {
   useGetPendingReward,
   useGetStakingInfo,
   useGetVotes,
-  useWithdraw
+  useWithdraw,
+  useFetch
 } from '../hooks';
 import { AGFI_ADDRESS, STAKING_ADDRESS, DEPLOYER_ADDRESS, LAUNCH_SUPPLY, TREASURY_ADDRESS } from '../config';
 import TopBar from './TopBar';
@@ -54,7 +66,8 @@ const supplyHistory = [
   { timestamp: 1651932697000, supply: 634.15 },
   { timestamp: 1657972403000, supply: 633.33 },
   { timestamp: 1663291646000, supply: 632.84 },
-  { timestamp: 1665547483000, supply: 632.75 }
+  { timestamp: 1665547483000, supply: 632.75 },
+  { timestamp: 1670152965000, supply: 632.36 }
 ];
 
 const isStateLoading = (txnState) => {
@@ -109,7 +122,6 @@ function Dashboard(props) {
   const deployerBalance = useTokenBalance(AGFI_ADDRESS, DEPLOYER_ADDRESS);
   const totalStaked = useTokenBalance(AGFI_ADDRESS, STAKING_ADDRESS);
   const totalTreasury = useTokenBalance(AGFI_ADDRESS, TREASURY_ADDRESS);
-  const stakingAllowance = useTokenAllowance(AGFI_ADDRESS, account, STAKING_ADDRESS);
   const priceData = useUniswapPriceData();
   const ethPrice = useCoingeckoPrice('ethereum', 'usd');
   const [circSupply, setCircSupply] = useState('');
@@ -124,6 +136,7 @@ function Dashboard(props) {
   const [unstakeAmount, setUnstakeAmount] = useState(0);
   const [actualStakeAmount, setActualStakeAmount] = useState(0);
   const [actualUnstakeAmount, setActualUnstakeAmount] = useState(0);
+  const [treasuryDataFormatted, setTreasuryDataFormatted] = useState([]);
   const [burnEvents, setBurnEvents] = useState([]);
 
   const accountInfo = useGetAccountInfo(account);
@@ -136,6 +149,11 @@ function Dashboard(props) {
   const { state: withdrawState, send: withdrawSend, resetState: withdrawResetState } = useWithdraw();
   const { state: depositState, send: depositSend, resetState: depositResetState } = useDeposit();
   const { state: approveState, send: approveSend, resetState: approveResetState } = useApprove();
+  const {
+    data: treasuryData,
+    loading: treasuryLoading,
+    error: treasuryDataError
+  } = useFetch('https://id-api.signata.net/api/v1/sheet/17JL5-xeKOA1w7KKMlh_kAc3dKdxVV64aEeTbrnAIjxU');
 
   useEffect(() => {
     async function getData() {
@@ -148,6 +166,29 @@ function Dashboard(props) {
       getData();
     }
   }, [burnEvents]);
+
+  useEffect(() => {
+    if (treasuryData) {
+      console.log(treasuryData);
+      const newData = [];
+      // eslint-disable-next-line no-plusplus
+      for (let i = 1; i < treasuryData.length; i++) {
+        const row = treasuryData[i];
+        newData.push({
+          date: row[0],
+          amt: parseFloat(row[1].replace(/,/g, '')),
+          difference: row[2]
+        });
+      }
+      setTreasuryDataFormatted(newData);
+    }
+  }, [treasuryData]);
+
+  useEffect(() => {
+    if (supplyHistory) {
+      console.log(supplyHistory);
+    }
+  }, []);
 
   useEffect(() => {
     async function getData() {
@@ -420,6 +461,33 @@ function Dashboard(props) {
               </Box>
             </Grid>
           )}
+          {!treasuryLoading && treasuryDataFormatted && (
+            <Grid item xs={12}>
+              <ResponsiveContainer width="100%" height={350}>
+                <BarChart data={treasuryDataFormatted} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="colorTreasury" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor={theme.palette.success.main} stopOpacity={0.9} />
+                      <stop offset="95%" stopColor={theme.palette.success.main} stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis domain={['dataMin - 500', 'dataMax + 500']} />
+                  <Tooltip />
+                  <Legend verticalAlign="top" height={36} />
+                  <Bar
+                    name="Treasury Value"
+                    type="monotone"
+                    dataKey="amt"
+                    stroke={theme.palette.success.main}
+                    fillOpacity={1}
+                    fill={theme.palette.success.dark}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </Grid>
+          )}
           <Grid item xs={12}>
             <ResponsiveContainer width="100%" height={350}>
               <AreaChart data={supplyHistory} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -431,7 +499,7 @@ function Dashboard(props) {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="timestamp" tickFormatter={(tstamp) => moment(tstamp).fromNow()} />
-                <YAxis />
+                <YAxis domain={['dataMin - 50', 'dataMax']} />
                 <Tooltip />
                 <Legend verticalAlign="top" height={36} />
                 <Area

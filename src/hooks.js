@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useContractFunction, useCall } from '@usedapp/core';
 import { Contract } from '@ethersproject/contracts';
 import agfiAbi from './agfiAbi.json';
@@ -374,4 +375,28 @@ export const useGetSingleValue = (method) => {
     return {};
   }
   return value?.[0];
+};
+
+export const useFetch = (url) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(url);
+        const json = await response.json();
+        setData(json);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
 };

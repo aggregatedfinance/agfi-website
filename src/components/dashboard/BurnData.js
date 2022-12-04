@@ -53,8 +53,8 @@ export default function BurnData({ burnEvents }) {
           <ResponsiveContainer width="100%" height={350}>
             <AreaChart data={burnData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={theme.palette.warning.main} stopOpacity={0.9} />
+                <linearGradient id="colorBurns" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor={theme.palette.error.main} stopOpacity={0.9} />
                   <stop offset="95%" stopColor={theme.palette.error.main} stopOpacity={0} />
                 </linearGradient>
               </defs>
@@ -69,7 +69,7 @@ export default function BurnData({ burnEvents }) {
                 dataKey="amount"
                 stroke={theme.palette.error.main}
                 fillOpacity={1}
-                fill="url(#colorUv)"
+                fill="url(#colorBurns)"
               />
             </AreaChart>
           </ResponsiveContainer>
