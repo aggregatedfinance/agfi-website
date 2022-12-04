@@ -25,6 +25,7 @@ import { useCoingeckoPrice } from '@usedapp/coingecko';
 import { useEthers, useTokenBalance, useTokenAllowance } from '@usedapp/core';
 import {
   BarChart,
+  LineChart,
   AreaChart,
   XAxis,
   YAxis,
@@ -32,6 +33,7 @@ import {
   Tooltip,
   Area,
   Bar,
+  Line,
   ResponsiveContainer,
   Legend
 } from 'recharts';
@@ -137,6 +139,7 @@ function Dashboard(props) {
   const [actualStakeAmount, setActualStakeAmount] = useState(0);
   const [actualUnstakeAmount, setActualUnstakeAmount] = useState(0);
   const [treasuryDataFormatted, setTreasuryDataFormatted] = useState([]);
+  const [latestTreasuryBalance, setLatestTreasuryBalance] = useState(0);
   const [burnEvents, setBurnEvents] = useState([]);
 
   const accountInfo = useGetAccountInfo(account);
@@ -149,11 +152,9 @@ function Dashboard(props) {
   const { state: withdrawState, send: withdrawSend, resetState: withdrawResetState } = useWithdraw();
   const { state: depositState, send: depositSend, resetState: depositResetState } = useDeposit();
   const { state: approveState, send: approveSend, resetState: approveResetState } = useApprove();
-  const {
-    data: treasuryData,
-    loading: treasuryLoading,
-    error: treasuryDataError
-  } = useFetch('https://id-api.signata.net/api/v1/sheet/17JL5-xeKOA1w7KKMlh_kAc3dKdxVV64aEeTbrnAIjxU');
+  const { data: treasuryData, loading: treasuryLoading } = useFetch(
+    'https://id-api.signata.net/api/v1/sheet/17JL5-xeKOA1w7KKMlh_kAc3dKdxVV64aEeTbrnAIjxU'
+  );
 
   useEffect(() => {
     async function getData() {
@@ -171,6 +172,7 @@ function Dashboard(props) {
     if (treasuryData) {
       console.log(treasuryData);
       const newData = [];
+      setLatestTreasuryBalance(treasuryData[treasuryData.length - 1][1]);
       // eslint-disable-next-line no-plusplus
       for (let i = 1; i < treasuryData.length; i++) {
         const row = treasuryData[i];
@@ -461,10 +463,18 @@ function Dashboard(props) {
               </Box>
             </Grid>
           )}
+          <Grid item xs={12}>
+            <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+              <Typography variant="body2">Trader Treasury Balance</Typography>
+              <Typography variant="h4" sx={{ fontFamily: 'Roboto' }}>
+                {latestTreasuryBalance ? `${fCurrency(latestTreasuryBalance)}` : 'Loading...'}
+              </Typography>
+            </Box>
+          </Grid>
           {!treasuryLoading && treasuryDataFormatted && (
             <Grid item xs={12}>
               <ResponsiveContainer width="100%" height={350}>
-                <BarChart data={treasuryDataFormatted} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <BarChart data={treasuryDataFormatted} margin={{ top: 10, right: 30, left: 30, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorTreasury" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor={theme.palette.success.main} stopOpacity={0.9} />
@@ -472,17 +482,25 @@ function Dashboard(props) {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis domain={['dataMin - 500', 'dataMax + 500']} />
-                  <Tooltip />
+                  <XAxis dataKey="date" tickFormatter={(tstamp) => moment(tstamp, 'DD/MM/YYYY').fromNow()} />
+                  <YAxis
+                    domain={['dataMin - 10000', 'dataMax + 500']}
+                    tickFormatter={(value) => `$${Math.round(value.toFixed(0) / 1000) * 1000}`}
+                  />
+                  <Tooltip
+                    formatter={(value) => `$${value.toFixed(0)}`}
+                    labelStyle={{ color: 'black' }}
+                    labelFormatter={(tstamp) => moment(tstamp, 'DD/MM/YYYY').fromNow()}
+                    wrapperStyle={{ color: 'black' }}
+                  />
                   <Legend verticalAlign="top" height={36} />
                   <Bar
-                    name="Treasury Value"
+                    name="Treasury Value (in USD)"
                     type="monotone"
                     dataKey="amt"
-                    stroke={theme.palette.success.main}
+                    stroke="url(#colorTreasury)"
                     fillOpacity={1}
-                    fill={theme.palette.success.dark}
+                    fill="url(#colorTreasury)"
                   />
                 </BarChart>
               </ResponsiveContainer>
@@ -490,7 +508,7 @@ function Dashboard(props) {
           )}
           <Grid item xs={12}>
             <ResponsiveContainer width="100%" height={350}>
-              <AreaChart data={supplyHistory} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+              <AreaChart data={supplyHistory} margin={{ top: 10, right: 30, left: 30, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor={theme.palette.secondary.main} stopOpacity={0.9} />
@@ -499,8 +517,13 @@ function Dashboard(props) {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="timestamp" tickFormatter={(tstamp) => moment(tstamp).fromNow()} />
-                <YAxis domain={['dataMin - 50', 'dataMax']} />
-                <Tooltip />
+                <YAxis domain={['dataMin - 100', 'dataMax']} tickFormatter={(value) => `${value.toFixed(0)}B`} />
+                <Tooltip
+                  formatter={(value) => `${value}B AGFI`}
+                  labelFormatter={(tstamp) => moment(tstamp).fromNow()}
+                  labelStyle={{ color: 'black' }}
+                  wrapperStyle={{ color: 'black' }}
+                />
                 <Legend verticalAlign="top" height={36} />
                 <Area
                   name="Total Supply (in billions)"
