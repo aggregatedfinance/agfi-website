@@ -14,6 +14,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { useEthers, useToken } from '@usedapp/core';
 import TopBar from './TopBar';
@@ -40,12 +41,19 @@ function TabPanel(props) {
 
 function Locker(props) {
   const { colorMode, mode } = props;
+  const { addr } = useParams();
   const theme = useTheme();
   const { account } = useEthers();
   const [pairAddress, setPairAddress] = useState('');
   const [validPairAddress, setValidPairAddress] = useState(false);
   const [tabValue, setTabValue] = useState(0);
   const tokenInfo = useToken(pairAddress || '');
+
+  useEffect(() => {
+    if (ethers.utils.isAddress(addr)) {
+      setPairAddress(addr);
+    }
+  }, [addr]);
 
   const onChangeTokenAddress = (e) => {
     if (ethers.utils.isAddress(e.target.value)) {
