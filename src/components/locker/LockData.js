@@ -3,11 +3,11 @@ import { Stack, Typography, Chip, Divider, Box, useTheme } from '@mui/material';
 import dayjs from 'dayjs';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import EditAttributesIcon from '@mui/icons-material/EditAttributes';
 import ReportIcon from '@mui/icons-material/Report';
 import { formatEther } from '@ethersproject/units';
 import { useLocks } from '../../hooks';
 import { fNumberWithDecimals } from '../../formatNumber';
+import IncrementLock from './IncrementLock';
 
 const relativeTime = require('dayjs/plugin/relativeTime');
 
@@ -95,6 +95,9 @@ function LockData({ account, pairAddress, idx }) {
             </Typography>
           </Box>
         </Stack>
+        {lockData.owner === account && (
+          <IncrementLock account={account} pairAddress={pairAddress} idx={idx} lockData={lockData} />
+        )}
         {isUnlocked && <Chip icon={<ReportIcon />} label="Lock Expired" color="warning" variant="filled" />}
       </Stack>
     </Box>

@@ -61,7 +61,7 @@ export function useApproveLocker(token) {
 
 export function useLockTokens() {
   const { state, send, events, resetState } = useContractFunction(lockerContract, 'lockTokens', {
-    transactionName: 'Lock Tokens'
+    transactionName: 'Lock'
   });
   return { state, send, events, resetState };
 }
