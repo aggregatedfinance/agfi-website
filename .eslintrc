@@ -12,6 +12,7 @@
   ],
   "plugins": [
     "prettier",
+    "react",
     "react-hooks"
   ],
   "parser": "@babel/eslint-parser",
