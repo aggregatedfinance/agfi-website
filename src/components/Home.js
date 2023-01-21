@@ -35,8 +35,8 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { DEXT_URL, DOCS_URL, ETHERSCAN_URL, TWITTER_URL, TG_URL } from '../config';
 
 const api = new GhostContentAPI({
-  url: 'https://aggregated-finance.ghost.io',
-  key: '85a4d049a908d7d990c7bd53fd',
+  url: 'https://blog.aggregated.finance',
+  key: '6b89710eedcdf2bad628401f2a',
   version: 'v5.0'
 });
 
