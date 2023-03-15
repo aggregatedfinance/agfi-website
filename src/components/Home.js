@@ -227,7 +227,7 @@ function Home() {
           {[
             {
               title: 'ETH Rewards',
-              body: '3% of sell volume paid directly in ETH to token holders',
+              body: '3% of buy, and 2% of sell volume paid directly in ETH to token holders',
               icon: <EmojiEventsIcon sx={{ fontSize: 64 }} />
             },
             // {
@@ -242,14 +242,14 @@ function Home() {
             },
             {
               title: 'Stronger Treasury',
-              body: '4% of buy & 6% of sell volume funds the treasury',
+              body: '3% of buy & 3% of sell volume funds the treasury',
               icon: <AccountBalanceIcon sx={{ fontSize: 64 }} />
             },
-            {
-              title: 'Operations',
-              body: '1% of buy & 3% of sell volume funds operational costs',
-              icon: <DnsIcon sx={{ fontSize: 64 }} />
-            },
+            //{
+            //  title: 'Operations',
+            //  body: '1% of buy & 3% of sell volume funds operational costs',
+            //  icon: <DnsIcon sx={{ fontSize: 64 }} />
+            //},
             {
               title: 'Token Supply',
               body: 'Fixed token supply of 1 Trillion AGFI',
