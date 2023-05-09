@@ -11,6 +11,13 @@ const agfiContract = new Contract(AGFI_ADDRESS, agfiAbi);
 const stakingContract = new Contract(STAKING_ADDRESS, stakingAbi);
 const lockerContract = new Contract(LOCKER_ADDRESS, lockerAbi);
 
+export function useMint() {
+  const { state, send, events, resetState } = useContractFunction(agfiContract, 'mint', {
+    transactionName: 'Mint NFT'
+  });
+  return { state, send, events, resetState };
+}
+
 export function useClaim() {
   const { state, send, events, resetState } = useContractFunction(agfiContract, 'claim', {
     transactionName: 'Claim Rewards'
