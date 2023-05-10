@@ -14,7 +14,8 @@ import { useEthers } from '@usedapp/core';
 import TransactionStatus from './dashboard/TransactionStatus';
 import Links from './dashboard/Links';
 import TopBar from './TopBar';
-import { useMint } from '../hooks';
+import { useApproveUsdt, useMint } from '../hooks';
+import { NFT_ADDRESS } from '../config';
 
 const isStateLoading = (txnState) => {
   console.log(txnState);
@@ -41,24 +42,37 @@ function NFT(props) {
   const { account } = useEthers();
   // const ethPrice = useCoingeckoPrice('ethereum', 'usd');
   const [isLoadingMint, setLoadingMint] = useState(false);
+  const [isLoadingApprove, setLoadingApprove] = useState(false);
 
   const { state: mintState, send: mintSend, resetState: mintResetState } = useMint();
+  const { state: approveState, send: approveSend, resetState: approveResetState } = useApproveUsdt();
 
   useEffect(() => {
+    if (approveState) {
+      setLoadingApprove(isStateLoading(approveState));
+    }
     if (mintState) {
       setLoadingMint(isStateLoading(mintState));
     }
-  }, [mintState]);
+  }, [mintState, approveState]);
+
   const onClickMint = () => {
     mintResetState();
+    approveResetState();
     mintSend();
+  };
+
+  const onClickApprove = () => {
+    mintResetState();
+    approveResetState();
+    approveSend(NFT_ADDRESS, BigNumber.from('400000000'));
   };
 
   return (
     <>
       <TopBar colorMode={colorMode} title="NFT" />
       <Container maxWidth="md">
-        <Grid container spacing={1} sx={{ my: 2 }}>
+        <Grid container spacing={1} sx={{ my: 2, justifyContent: 'center' }}>
           {!account && (
             <Grid item xs={12}>
               <Alert severity="error">
@@ -69,19 +83,31 @@ function NFT(props) {
             </Grid>
           )}
           {account && (
-            <Grid item xs={12}>
-              <Card sx={{ display: 'flex', p: 2, borderRadius: 0 }}>
+            <Grid item xs={6}>
+              <Card sx={{ display: 'flex', p: 2, m: 2, borderRadius: 4 }}>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h4" textAlign="center">
+                  <Typography variant="h4" textAlign="center" sx={{ textTransform: 'uppercase' }}>
                     Mint NFT
                   </Typography>
-                  <Typography variant="h4" textAlign="center">
-                    Mint NFT
+                  <Typography variant="body1" textAlign="center" gutterBottom>
+                    Mint price: USDT$400
                   </Typography>
-                  <ButtonGroup size="large" orientation="horizontal" fullWidth>
+                  <Typography variant="body2" textAlign="center">
+                    Each wallet can mint a maximum of 10 NFTs
+                  </Typography>
+                  <ButtonGroup size="large" orientation="vertical" fullWidth sx={{ mt: 2 }}>
+                    <Button
+                      onClick={onClickApprove}
+                      disabled={isLoadingMint || isLoadingApprove}
+                      variant="outlined"
+                      color="success"
+                      sx={{ borderRadius: 2 }}
+                    >
+                      Approve USDT
+                    </Button>
                     <Button
                       onClick={onClickMint}
-                      disabled={isLoadingMint}
+                      disabled={isLoadingMint || isLoadingApprove}
                       variant="contained"
                       color="success"
                       sx={{ borderRadius: 2 }}
@@ -101,11 +127,23 @@ function NFT(props) {
                   {mintState && mintState.status === 'Exception' && (
                     <TransactionStatus isError message={mintState.errorMessage} />
                   )}
+                  {approveState && approveState.status === 'PendingSignature' && (
+                    <TransactionStatus isLoading message="Waiting for Wallet Signature..." />
+                  )}
+                  {approveState && approveState.status === 'Mining' && (
+                    <TransactionStatus isLoading message="Transaction Pending..." />
+                  )}
+                  {approveState && approveState.status === 'Success' && (
+                    <TransactionStatus isSuccess message="Approval Complete!" />
+                  )}
+                  {approveState && approveState.status === 'Exception' && (
+                    <TransactionStatus isError message={approveState.errorMessage} />
+                  )}
                 </Box>
               </Card>
             </Grid>
           )}
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ mt: 20 }}>
             <Links />
           </Grid>
         </Grid>

@@ -338,7 +338,7 @@ function Dashboard(props) {
                   display: 'flex',
                   textAlign: 'center',
                   padding: 2,
-                  borderRadius: 0
+                  borderRadius: 4
                 }}
               >
                 <Box sx={{ flexGrow: 1 }}>
@@ -377,7 +377,7 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12} sm={6}>
-              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
                 <Typography variant="body1">Current AGFI Price</Typography>
                 <Typography variant="h4" sx={{ fontFamily: 'Roboto' }}>
                   {priceData && priceData.token
@@ -392,7 +392,7 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12} sm={6}>
-              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
                 <Typography variant="body1">Market Cap</Typography>
                 <Typography variant="h4" sx={{ fontFamily: 'Roboto' }}>
                   {circSupply && priceData && ethPrice
@@ -407,7 +407,7 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12} sm={6}>
-              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
                 <Typography variant="body2">Circulating Supply</Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {circSupply ? `${fNumber(formatUnits(circSupply || 0, 9))} AGFI` : 'Loading...'}
@@ -422,7 +422,7 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12} sm={6}>
-              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
                 <Typography variant="body2">Burned Supply 🔥</Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {burnedSupply ? `${fNumber(formatUnits(burnedSupply || 0, 9))} AGFI` : 'Loading...'}
@@ -437,7 +437,7 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12} sm={6}>
-              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
                 <Typography variant="body2">Total Staked</Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {totalStaked ? `${fNumber(formatUnits(totalStaked || 0, 9))} AGFI` : 'Loading...'}
@@ -452,7 +452,7 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12} sm={6}>
-              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+              <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
                 <Typography variant="body2">DAO Treasury Balance</Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {totalTreasury ? `${fNumber(formatUnits(totalTreasury || 0, 9))} AGFI` : 'Loading...'}
@@ -466,7 +466,7 @@ function Dashboard(props) {
             </Grid>
           )}
           <Grid item xs={12}>
-            <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 0 }}>
+            <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
               <Typography variant="body2">Trader Treasury Balance</Typography>
               <Typography variant="h4" sx={{ fontFamily: 'Roboto' }}>
                 {latestTreasuryBalance ? `${fCurrency(latestTreasuryBalance)}` : 'Loading...'}
@@ -540,7 +540,7 @@ function Dashboard(props) {
           </Grid>
           {account && (
             <Grid item xs={12}>
-              <Card sx={{ display: 'flex', p: 2, borderRadius: 0 }}>
+              <Card sx={{ display: 'flex', p: 2, borderRadius: 4 }}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography variant="h4" textAlign="center">
                     Your Claimable Rewards
@@ -626,7 +626,7 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12}>
-              <Card sx={{ display: 'flex', p: 2, borderRadius: 0 }}>
+              <Card sx={{ display: 'flex', p: 2, borderRadius: 4 }}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'background.paper', marginBottom: 2 }}>
                     <Tabs

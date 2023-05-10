@@ -44,11 +44,10 @@ export default function Links() {
             target="_blank"
             rel="noopener noreferrer"
             startIcon={link.logo}
-            size="large"
             fullWidth
             variant="outlined"
             color="info"
-            sx={{ height: 56, borderRadius: 0 }}
+            sx={{ height: 48, borderRadius: 2 }}
           >
             {link.name}
           </Button>

@@ -39,7 +39,7 @@ export default function BurnData({ burnEvents }) {
 
   return (
     // <RootStyle>
-    <Card>
+    <Card sx={{ borderRadius: 4 }}>
       <Stack spacing={2} sx={{ p: 2 }}>
         <Typography variant="h5" textAlign="center">
           Recent Auto Burns

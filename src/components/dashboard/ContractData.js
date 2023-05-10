@@ -47,7 +47,7 @@ export default function ContractData({ priceData, ethPrice }) {
 
   return (
     // <RootStyle>
-    <Card>
+    <Card sx={{ borderRadius: 4 }}>
       <Stack spacing={2} sx={{ p: 2 }}>
         <Typography variant="h4" textAlign="center">
           AGFI Contract Information

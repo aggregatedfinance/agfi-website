@@ -4,12 +4,14 @@ import { Contract } from '@ethersproject/contracts';
 import agfiAbi from './agfiAbi.json';
 import stakingAbi from './stakingAbi.json';
 import lockerAbi from './lockerAbi.json';
+import usdtAbi from './usdtAbi.json';
 import uniswapV2PairAbi from './uniswapV2PairAbi.json';
-import { AGFI_ADDRESS, STAKING_ADDRESS, LOCKER_ADDRESS } from './config';
+import { AGFI_ADDRESS, STAKING_ADDRESS, LOCKER_ADDRESS, USDT_ADDRESS } from './config';
 
 const agfiContract = new Contract(AGFI_ADDRESS, agfiAbi);
 const stakingContract = new Contract(STAKING_ADDRESS, stakingAbi);
 const lockerContract = new Contract(LOCKER_ADDRESS, lockerAbi);
+const usdtContract = new Contract(USDT_ADDRESS, usdtAbi);
 
 export function useMint() {
   const { state, send, events, resetState } = useContractFunction(agfiContract, 'mint', {
@@ -47,6 +49,13 @@ export function useWithdraw() {
 export function useDeposit() {
   const { state, send, events, resetState } = useContractFunction(stakingContract, 'deposit', {
     transactionName: 'Stake'
+  });
+  return { state, send, events, resetState };
+}
+
+export function useApproveUsdt() {
+  const { state, send, events, resetState } = useContractFunction(usdtContract, 'approve', {
+    transactionName: 'Approve'
   });
   return { state, send, events, resetState };
 }
