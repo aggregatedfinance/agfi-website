@@ -1,27 +1,28 @@
 {
   "name": "agfi-web",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "engines": {
     "node": "<=17.0.0"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
-    "@babel/runtime": "^7.21.5",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
+    "@babel/runtime": "^7.21.0",
     "@coinbase/wallet-sdk": "^3.6.6",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@ethersproject/contracts": "^5.7.0",
     "@ethersproject/units": "^5.7.0",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.12.3",
-    "@mui/x-date-pickers": "^6.3.1",
+    "@mui/material": "^5.13.2",
+    "@mui/x-date-pickers": "^6.5.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@svgr/webpack": "^7.0.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@tryghost/content-api": "^1.11.9",
-    "@usedapp/coingecko": "^1.1.15",
-    "@usedapp/core": "^1.2.9",
+    "@tryghost/content-api": "^1.11.10",
+    "@usedapp/coingecko": "^1.1.16",
+    "@usedapp/core": "^1.2.10",
     "@walletconnect/web3-provider": "^1.7.8",
     "assert": "^2.0.0",
     "axios": "^1.4.0",
@@ -34,12 +35,12 @@
     "camelcase": "^7.0.1",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "crypto-browserify": "^3.12.0",
-    "css-loader": "^6.7.3",
+    "css-loader": "^6.7.4",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",
-    "eslint": "^8.40.0",
+    "eslint": "^8.41.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^4.0.1",
     "ethers": "^5.7.2",
@@ -67,7 +68,7 @@
     "react-dom": "^18.2.0",
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.11.1",
-    "recharts": "^2.5.0",
+    "recharts": "^2.6.2",
     "resolve": "^1.22.2",
     "resolve-url-loader": "^5.0.0",
     "sass-loader": "^13.2.2",
@@ -81,22 +82,17 @@
     "url": "^0.11.0",
     "web-vitals": "^3.3.1",
     "web3modal": "^1.9.12",
-    "webpack": "^5.82.0",
-    "webpack-dev-server": "^4.14.0",
+    "webpack": "^5.84.1",
+    "webpack-dev-server": "^4.15.0",
     "webpack-manifest-plugin": "^5.0.0",
-    "workbox-webpack-plugin": "^6.5.4"
+    "workbox-webpack-plugin": "^6.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.8"
+    "@babel/core": "^7.21.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ]
   },
   "browserslist": {
     "production": [

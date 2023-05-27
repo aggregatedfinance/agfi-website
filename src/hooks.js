@@ -5,17 +5,26 @@ import agfiAbi from './agfiAbi.json';
 import stakingAbi from './stakingAbi.json';
 import lockerAbi from './lockerAbi.json';
 import usdtAbi from './usdtAbi.json';
+import nftAbi from './nftAbi.json';
 import uniswapV2PairAbi from './uniswapV2PairAbi.json';
-import { AGFI_ADDRESS, STAKING_ADDRESS, LOCKER_ADDRESS, USDT_ADDRESS } from './config';
+import { AGFI_ADDRESS, STAKING_ADDRESS, LOCKER_ADDRESS, USDT_ADDRESS, NFT_ADDRESS } from './config';
 
 const agfiContract = new Contract(AGFI_ADDRESS, agfiAbi);
 const stakingContract = new Contract(STAKING_ADDRESS, stakingAbi);
 const lockerContract = new Contract(LOCKER_ADDRESS, lockerAbi);
 const usdtContract = new Contract(USDT_ADDRESS, usdtAbi);
+const nftContract = new Contract(NFT_ADDRESS, nftAbi);
 
 export function useMint() {
-  const { state, send, events, resetState } = useContractFunction(agfiContract, 'mint', {
+  const { state, send, events, resetState } = useContractFunction(nftContract, 'mintNFT', {
     transactionName: 'Mint NFT'
+  });
+  return { state, send, events, resetState };
+}
+
+export function useBulkMint() {
+  const { state, send, events, resetState } = useContractFunction(nftContract, 'bulkMintNFT', {
+    transactionName: 'Bulk Mint NFT'
   });
   return { state, send, events, resetState };
 }

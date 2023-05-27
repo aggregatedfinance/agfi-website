@@ -71,7 +71,7 @@ const supplyHistory = [
   { timestamp: 1665547483000, supply: 632.75 },
   { timestamp: 1670152965000, supply: 632.36 },
   { timestamp: 1675991494000, supply: 631.79 },
-  { timestamp: 1683511141000, supply: 631.36 },
+  { timestamp: 1683511141000, supply: 631.36 }
 ];
 
 const isStateLoading = (txnState) => {
@@ -343,20 +343,15 @@ function Dashboard(props) {
               >
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography sx={{ typography: 'h4' }}>Your AGFI Balance</Typography>
-                  <Typography variant="h3" sx={{ fontFamily: 'Roboto' }}>
-                    {fNumber(formatUnits(agfiBalance || 0, 9))} AGFI
-                  </Typography>
+                  <Typography variant="h3">{fNumber(formatUnits(agfiBalance || 0, 9))} AGFI</Typography>
                   {priceData && priceData.token && (
-                    <Typography
-                      variant="h5"
-                      sx={{ fontFamily: 'Roboto', textAlign: 'center', color: 'text.secondary' }}
-                    >
+                    <Typography variant="h5" sx={{ textAlign: 'center', color: 'text.secondary' }}>
                       {fCurrency(formatUnits(agfiBalance || 0, 9) * priceData.token.derivedETH * ethPrice)} USD
                     </Typography>
                   )}
                   <Typography sx={{ typography: 'h6' }}>Your DAO Voting Power</Typography>
                   {votes && (
-                    <Typography variant="body1" sx={{ fontFamily: 'Roboto', color: 'text.primary' }}>
+                    <Typography variant="body1" sx={{ color: 'text.primary' }}>
                       {fNumber(formatUnits(votes || 0, 9))} Votes
                     </Typography>
                   )}
