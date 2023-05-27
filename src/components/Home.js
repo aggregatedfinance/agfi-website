@@ -245,11 +245,11 @@ function Home() {
               body: '3% of buy & 3% of sell volume funds the treasury',
               icon: <AccountBalanceIcon sx={{ fontSize: 64 }} />
             },
-            //{
+            // {
             //  title: 'Operations',
             //  body: '1% of buy & 3% of sell volume funds operational costs',
             //  icon: <DnsIcon sx={{ fontSize: 64 }} />
-            //},
+            // },
             {
               title: 'Token Supply',
               body: 'Fixed token supply of 1 Trillion AGFI',
