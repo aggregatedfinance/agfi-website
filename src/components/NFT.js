@@ -118,13 +118,13 @@ function NFT() {
                   m: 2,
                   borderRadius: 4,
                   border: 1,
-                  borderColor: theme.palette.primary.main,
-                  boxShadow: '0 0 25px ' + theme.palette.primary.main
+                  borderColor: theme.palette.primary.dark,
+                  boxShadow: '0 0 25px ' + theme.palette.primary.dark
                 }}
               >
                 <Box sx={{ flexGrow: 1 }}>
                   <Stack spacing={1}>
-                    <Typography variant="h4" textAlign="center" sx={{ textTransform: 'uppercase' }}>
+                    <Typography variant="h4" textAlign="center" color="primary" sx={{ textTransform: 'uppercase' }}>
                       <i>The AGFI Vault</i>
                     </Typography>
                     <Typography variant="body1" textAlign="center">

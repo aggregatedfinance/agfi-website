@@ -402,7 +402,7 @@ function Dashboard() {
                     ? `$${fNumber(formatUnits(circSupply || 0, 9) * priceData.token.derivedETH * ethPrice)}`
                     : 'Loading...'}
                   <Typography variant="body2" sx={{ color: 'text.secondary' }} textAlign="center">
-                    Derived from AGFI/WETH Uniswap Price
+                    Based on AGFI/WETH Uniswap Price
                   </Typography>
                 </Typography>
               </Box>
