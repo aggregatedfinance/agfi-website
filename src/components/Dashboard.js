@@ -117,8 +117,7 @@ function a11yProps(mode) {
   };
 }
 
-function Dashboard(props) {
-  const { colorMode } = props;
+function Dashboard() {
   const { account } = useEthers();
   const theme = useTheme();
 
@@ -319,9 +318,9 @@ function Dashboard(props) {
 
   return (
     <>
-      <TopBar colorMode={colorMode} title="Dashboard" />
+      <TopBar title="Dashboard" />
       <Container maxWidth="md">
-        <Grid container spacing={1} sx={{ my: 2 }}>
+        <Grid container spacing={4} sx={{ my: 2 }}>
           {!account && (
             <Grid item xs={12}>
               <Alert severity="error">
@@ -338,11 +337,16 @@ function Dashboard(props) {
                   display: 'flex',
                   textAlign: 'center',
                   padding: 2,
-                  borderRadius: 4
+                  borderRadius: 4,
+                  border: 1,
+                  borderColor: theme.palette.primary.dark,
+                  boxShadow: '0 0 10px ' + theme.palette.primary.dark
                 }}
               >
                 <Box sx={{ flexGrow: 1 }}>
-                  <Typography sx={{ typography: 'h4' }}>Your AGFI Balance</Typography>
+                  <Typography sx={{ typography: 'h4' }} color="primary">
+                    Your AGFI Balance
+                  </Typography>
                   <Typography variant="h3">{fNumber(formatUnits(agfiBalance || 0, 9))} AGFI</Typography>
                   {priceData && priceData.token && (
                     <Typography variant="h5" sx={{ textAlign: 'center', color: 'text.secondary' }}>
@@ -373,7 +377,9 @@ function Dashboard(props) {
           {account && (
             <Grid item xs={12} sm={6}>
               <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
-                <Typography variant="body1">Current AGFI Price</Typography>
+                <Typography variant="body1" color="primary">
+                  Current AGFI Price
+                </Typography>
                 <Typography variant="h4" sx={{ fontFamily: 'Roboto' }}>
                   {priceData && priceData.token
                     ? `$${(priceData.token.derivedETH * ethPrice).toFixed(8)}`
@@ -388,7 +394,9 @@ function Dashboard(props) {
           {account && (
             <Grid item xs={12} sm={6}>
               <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
-                <Typography variant="body1">Market Cap</Typography>
+                <Typography variant="body1" color="primary">
+                  Market Cap
+                </Typography>
                 <Typography variant="h4" sx={{ fontFamily: 'Roboto' }}>
                   {circSupply && priceData && ethPrice
                     ? `$${fNumber(formatUnits(circSupply || 0, 9) * priceData.token.derivedETH * ethPrice)}`
@@ -403,7 +411,9 @@ function Dashboard(props) {
           {account && (
             <Grid item xs={12} sm={6}>
               <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
-                <Typography variant="body2">Circulating Supply</Typography>
+                <Typography variant="body2" color="primary">
+                  Circulating Supply
+                </Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {circSupply ? `${fNumber(formatUnits(circSupply || 0, 9))} AGFI` : 'Loading...'}
                 </Typography>
@@ -418,7 +428,9 @@ function Dashboard(props) {
           {account && (
             <Grid item xs={12} sm={6}>
               <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
-                <Typography variant="body2">Burned Supply 🔥</Typography>
+                <Typography variant="body2" color="primary">
+                  Burned Supply 🔥
+                </Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {burnedSupply ? `${fNumber(formatUnits(burnedSupply || 0, 9))} AGFI` : 'Loading...'}
                 </Typography>
@@ -433,7 +445,9 @@ function Dashboard(props) {
           {account && (
             <Grid item xs={12} sm={6}>
               <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
-                <Typography variant="body2">Total Staked</Typography>
+                <Typography variant="body2" color="primary">
+                  Total Staked
+                </Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {totalStaked ? `${fNumber(formatUnits(totalStaked || 0, 9))} AGFI` : 'Loading...'}
                 </Typography>
@@ -448,7 +462,9 @@ function Dashboard(props) {
           {account && (
             <Grid item xs={12} sm={6}>
               <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
-                <Typography variant="body2">DAO Treasury Balance</Typography>
+                <Typography variant="body2" color="primary">
+                  DAO Treasury Balance
+                </Typography>
                 <Typography variant="h6" sx={{ fontFamily: 'Roboto' }}>
                   {totalTreasury ? `${fNumber(formatUnits(totalTreasury || 0, 9))} AGFI` : 'Loading...'}
                 </Typography>
@@ -462,7 +478,9 @@ function Dashboard(props) {
           )}
           <Grid item xs={12}>
             <Box sx={{ flexGrow: 1, textAlign: 'center', p: 1, borderRadius: 4 }}>
-              <Typography variant="body2">Trader Treasury Balance</Typography>
+              <Typography variant="body2" color="primary">
+                Trader Treasury Balance
+              </Typography>
               <Typography variant="h4" sx={{ fontFamily: 'Roboto' }}>
                 {latestTreasuryBalance ? `${fCurrency(latestTreasuryBalance)}` : 'Loading...'}
               </Typography>
@@ -535,9 +553,18 @@ function Dashboard(props) {
           </Grid>
           {account && (
             <Grid item xs={12}>
-              <Card sx={{ display: 'flex', p: 2, borderRadius: 4 }}>
+              <Card
+                sx={{
+                  display: 'flex',
+                  p: 2,
+                  borderRadius: 4,
+                  border: 1,
+                  borderColor: theme.palette.primary.dark,
+                  boxShadow: '0 0 10px ' + theme.palette.primary.dark
+                }}
+              >
                 <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h4" textAlign="center">
+                  <Typography variant="h4" textAlign="center" color="primary">
                     Your Claimable Rewards
                   </Typography>
                   {accountInfo && (
@@ -621,7 +648,16 @@ function Dashboard(props) {
           )}
           {account && (
             <Grid item xs={12}>
-              <Card sx={{ display: 'flex', p: 2, borderRadius: 4 }}>
+              <Card
+                sx={{
+                  display: 'flex',
+                  p: 2,
+                  borderRadius: 4,
+                  border: 1,
+                  borderColor: theme.palette.primary.dark,
+                  boxShadow: '0 0 10px ' + theme.palette.primary.dark
+                }}
+              >
                 <Box sx={{ flexGrow: 1 }}>
                   <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'background.paper', marginBottom: 2 }}>
                     <Tabs
@@ -636,7 +672,7 @@ function Dashboard(props) {
                   </Box>
                   <TabPanel value={tabIndex} index={0} sx={{ marginBottom: 2 }}>
                     <Stack spacing={1}>
-                      <Typography variant="h4" textAlign="center">
+                      <Typography variant="h4" textAlign="center" color="primary">
                         Staking
                       </Typography>
                       <Typography variant="body2" textAlign="center">
@@ -712,7 +748,7 @@ function Dashboard(props) {
 
                   <TabPanel value={tabIndex} index={1} sx={{ marginBottom: 2 }}>
                     <Stack spacing={1}>
-                      <Typography variant="body2" textAlign="center">
+                      <Typography variant="body2" textAlign="center" color="primary">
                         Your Staked Balance
                       </Typography>
                       <Typography variant="h5" sx={{ fontFamily: 'Roboto' }} textAlign="center">

@@ -8,13 +8,15 @@ import {
   Chip,
   TableRow,
   TableHead,
-  Card
+  Card,
+  useTheme
 } from '@mui/material';
 import { formatUnits } from '@ethersproject/units';
 import { fShortenNumber, fCurrency } from '../../formatNumber';
 import { useGetSingleValue } from '../../hooks';
 
 export default function ContractData({ priceData, ethPrice }) {
+  const theme = useTheme();
   const c1Balance = useGetSingleValue('tokensForC1');
   const c2Balance = useGetSingleValue('tokensForC2');
   const c3Balance = useGetSingleValue('tokensForC3');
@@ -47,13 +49,20 @@ export default function ContractData({ priceData, ethPrice }) {
 
   return (
     // <RootStyle>
-    <Card sx={{ borderRadius: 4 }}>
+    <Card
+      sx={{
+        borderRadius: 4,
+        border: 1,
+        borderColor: theme.palette.secondary.dark,
+        boxShadow: '0 0 10px ' + theme.palette.secondary.dark
+      }}
+    >
       <Stack spacing={2} sx={{ p: 2 }}>
-        <Typography variant="h4" textAlign="center">
+        <Typography variant="h4" textAlign="center" color="secondary">
           AGFI Contract Information
         </Typography>
         <Typography variant="h6" textAlign="center">
-          Tax Rates and Status
+          <b>Tax Rates and Status</b>
         </Typography>
         <Typography variant="body2">
           Taxes collected on buys and sells are held in the AGFI contract. Every sell on Uniswap executes the sell of
@@ -88,7 +97,7 @@ export default function ContractData({ priceData, ethPrice }) {
                     {row.buyFee ? (
                       <Chip
                         label={`${row.buyFee / 100}%`}
-                        color="primary"
+                        color="secondary"
                         size="small"
                         sx={{ borderRadius: 0.5, width: '100%' }}
                       />
@@ -100,7 +109,7 @@ export default function ContractData({ priceData, ethPrice }) {
                     {row.sellFee ? (
                       <Chip
                         label={`${row.sellFee / 100}%`}
-                        color="primary"
+                        color="secondary"
                         size="small"
                         sx={{ borderRadius: 0.5, width: '100%' }}
                       />
@@ -135,7 +144,7 @@ export default function ContractData({ priceData, ethPrice }) {
         </TableContainer>
 
         <Typography variant="h6" textAlign="center">
-          Tax Wallet Destinations
+          <b>Tax Wallet Destinations</b>
         </Typography>
 
         <Typography variant="body2">

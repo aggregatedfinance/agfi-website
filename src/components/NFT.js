@@ -10,7 +10,8 @@ import {
   Alert,
   AlertTitle,
   Slider,
-  Stack
+  Stack,
+  useTheme
 } from '@mui/material';
 import { useEthers, useTokenAllowance, useTokenBalance } from '@usedapp/core';
 import TransactionStatus from './dashboard/TransactionStatus';
@@ -42,8 +43,8 @@ const isStateLoading = (txnState) => {
   return false;
 };
 
-function NFT(props) {
-  const { colorMode } = props;
+function NFT() {
+  const theme = useTheme();
   const { account } = useEthers();
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoadingMint, setLoadingMint] = useState(false);
@@ -96,7 +97,7 @@ function NFT(props) {
 
   return (
     <>
-      <TopBar colorMode={colorMode} title="NFT" />
+      <TopBar title="AGFI VAULT" />
       <Container maxWidth="md">
         <Grid container spacing={1} sx={{ my: 2, justifyContent: 'center' }}>
           {!account && (
@@ -110,7 +111,17 @@ function NFT(props) {
           )}
           {account && (
             <Grid item xs={6}>
-              <Card sx={{ display: 'flex', p: 2, m: 2, borderRadius: 4 }}>
+              <Card
+                sx={{
+                  display: 'flex',
+                  p: 2,
+                  m: 2,
+                  borderRadius: 4,
+                  border: 1,
+                  borderColor: theme.palette.primary.main,
+                  boxShadow: '0 0 25px ' + theme.palette.primary.main
+                }}
+              >
                 <Box sx={{ flexGrow: 1 }}>
                   <Stack spacing={1}>
                     <Typography variant="h4" textAlign="center" sx={{ textTransform: 'uppercase' }}>
@@ -136,7 +147,7 @@ function NFT(props) {
                       min={1}
                       max={10}
                       valueLabelDisplay="auto"
-                      color="secondary"
+                      color="primary"
                     />
                     <Typography variant="body2" textAlign="center" sx={{ fontSize: 10 }}>
                       Each wallet can mint a maximum of 10 NFTs
@@ -146,7 +157,7 @@ function NFT(props) {
                         onClick={onClickApprove}
                         disabled={isLoadingMint || isLoadingApprove || allowance >= quantity * 400000000}
                         variant="contained"
-                        color="success"
+                        color="primary"
                         sx={{ borderRadius: 2 }}
                       >
                         Approve USDT
@@ -155,7 +166,7 @@ function NFT(props) {
                         onClick={onClickMint}
                         disabled={isLoadingMint || isLoadingApprove || allowance < quantity * 400000000}
                         variant="contained"
-                        color="success"
+                        color="primary"
                         sx={{ borderRadius: 2 }}
                       >
                         Mint NFT{quantity > 1 && 's'}

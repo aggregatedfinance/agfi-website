@@ -39,9 +39,16 @@ export default function BurnData({ burnEvents }) {
 
   return (
     // <RootStyle>
-    <Card sx={{ borderRadius: 4 }}>
+    <Card
+      sx={{
+        borderRadius: 4,
+        border: 1,
+        borderColor: theme.palette.error.dark,
+        boxShadow: '0 0 10px ' + theme.palette.error.dark
+      }}
+    >
       <Stack spacing={2} sx={{ p: 2 }}>
-        <Typography variant="h5" textAlign="center">
+        <Typography variant="h5" textAlign="center" color="error">
           Recent Auto Burns
         </Typography>
         <Typography variant="body2">

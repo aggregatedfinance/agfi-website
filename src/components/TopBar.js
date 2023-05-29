@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, IconButton } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import HomeIcon from '@mui/icons-material/Home';
 import { useEthers, shortenAddress } from '@usedapp/core';
 import Web3Modal from 'web3modal';
@@ -52,8 +49,7 @@ const web3Modal = new Web3Modal({
 });
 
 function TopBar(props) {
-  const { colorMode, title } = props;
-  const theme = useTheme();
+  const { title } = props;
 
   const { account, activate, chainId, activateBrowserWallet } = useEthers();
 
@@ -102,10 +98,10 @@ function TopBar(props) {
             </Typography>
           </Box>
         )}
-        <IconButton sx={{ mx: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+        {/* <IconButton sx={{ mx: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
           {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-        </IconButton>
-        <Button target="_blank" href={UNISWAP_URL} color="secondary" variant="text">
+        </IconButton> */}
+        <Button target="_blank" href={UNISWAP_URL} color="primary" variant="text">
           Buy AGFI
         </Button>
         {!account && (

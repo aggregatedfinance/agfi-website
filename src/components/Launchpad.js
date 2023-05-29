@@ -23,8 +23,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useEthers, useTokenBalance, useTokenAllowance } from '@usedapp/core';
 import TopBar from './TopBar';
 
-function Launchpad(props) {
-  const { colorMode } = props;
+function Launchpad() {
   const { account } = useEthers();
   const [showCreate, setShowCreate] = useState(true);
   const [tokenAddress, setTokenAddress] = useState('');
@@ -131,7 +130,7 @@ function Launchpad(props) {
 
   return (
     <>
-      <TopBar colorMode={colorMode} title="Launchpad" />
+      <TopBar title="Launchpad" />
       <Container maxWidth="md">
         <Grid container spacing={2} sx={{ my: 2 }} justifyContent="center">
           <Grid item sx={12} textAlign="center">

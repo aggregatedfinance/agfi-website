@@ -39,8 +39,7 @@ function TabPanel(props) {
   );
 }
 
-function Locker(props) {
-  const { colorMode, mode } = props;
+function Locker() {
   const { addr } = useParams();
   const theme = useTheme();
   const { account } = useEthers();
@@ -73,7 +72,7 @@ function Locker(props) {
 
   return (
     <>
-      <TopBar colorMode={colorMode} title="Locker" />
+      <TopBar title="Locker" />
       <Container maxWidth="md">
         <Grid container spacing={2} sx={{ my: 2 }} justifyContent="center">
           <Grid item xs={12} textAlign="center">
